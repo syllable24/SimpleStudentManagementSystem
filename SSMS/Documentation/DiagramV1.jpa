@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" v="5.2" rws="_1544623860701473" cws="_1544623860701473" persistenceUnitName="DEFAULT_PU" sm="false" xs="false" id="_1544623860545348" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
+    <jpa:entity compositePrimaryKeyClass="CoursesGroupsPK" abs="false" class="CoursesGroups" v="true" xre="false" m="false" rootElement="_1544623860545348" id="_1544623860545349">
+        <jpa:attributes>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="courses" id="_1544623860545369">
+                <jpa:column name="Courses" unique="false" nullable="false" insertable="true" updatable="true" table="Courses_Groups" length="254"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="groups" id="_1544623860545370">
+                <jpa:column name="Groups" unique="false" nullable="true" insertable="true" updatable="true" table="Courses_Groups" length="254"/>
+            </jpa:basic>
+            <jpa:id attribute-type="String" v="true" name="elementKey" id="_1544623860545371">
+                <jpa:column name="element_key" unique="false" nullable="false" insertable="true" updatable="true" table="Courses_Groups" length="50"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Courses_Groups">
+            <jpa:unique-constraint>
+                <jpa:column-name>Courses</jpa:column-name>
+                <jpa:column-name>element_key</jpa:column-name>
+            </jpa:unique-constraint>
+        </jpa:table>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="DepartmentsPK" abs="false" class="Departments" v="true" xre="false" m="false" rootElement="_1544623860545348" id="_1544623860545350">
+        <jpa:attributes>
+            <jpa:basic optional="false" attribute-type="int" v="true" name="org" id="_1544623860545373">
+                <jpa:column name="Org" unique="false" nullable="false" insertable="true" updatable="true" table="Departments"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1544623860545365" connected-attribute-id="_1544623860561457" v="true" name="school" id="_1544623860545374">
+                <jpa:join-column name="SCHOOL" rc="ORG" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1544623860545364" connected-attribute-id="_1544623860561453" v="true" name="majorsCollection" id="_1544623860545375"/>
+            <jpa:id attribute-type="String" v="true" name="id" id="_1544623860545372">
+                <jpa:column name="ID" unique="false" nullable="false" insertable="true" updatable="true" table="Departments" length="254"/>
+                <jpa:generated-value strategy="DEFAULT"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Departments">
+            <jpa:unique-constraint>
+                <jpa:column-name>School</jpa:column-name>
+                <jpa:column-name>Org</jpa:column-name>
+            </jpa:unique-constraint>
+        </jpa:table>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="TeachersSubjectsPK" abs="false" class="TeachersSubjects" v="true" xre="false" m="false" rootElement="_1544623860545348" id="_1544623860545351">
+        <jpa:attributes>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="teachers" id="_1544623860545376">
+                <jpa:column name="Teachers" unique="false" nullable="false" insertable="true" updatable="true" table="Teachers_Subjects" length="254"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="subjects" id="_1544623860545378">
+                <jpa:column name="Subjects" unique="false" nullable="true" insertable="true" updatable="true" table="Teachers_Subjects" length="254"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="elementKey" id="_1544623860545379">
+                <jpa:column name="element_key" unique="false" nullable="false" insertable="true" updatable="true" table="Teachers_Subjects" length="50"/>
+            </jpa:basic>
+            <jpa:id attribute-type="String" v="true" name="id" id="_1544623860545377">
+                <jpa:column name="ID" unique="false" nullable="false" insertable="true" updatable="true" table="Teachers_Subjects" length="254"/>
+                <jpa:generated-value strategy="DEFAULT"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Teachers_Subjects">
+            <jpa:unique-constraint>
+                <jpa:column-name>Teachers</jpa:column-name>
+                <jpa:column-name>element_key</jpa:column-name>
+            </jpa:unique-constraint>
+        </jpa:table>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="SchedulerPK" abs="false" class="Scheduler" v="true" xre="false" m="false" rootElement="_1544623860545348" id="_1544623860545352">
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="course" id="_1544623860545381">
+                <jpa:column name="Course" unique="false" nullable="true" insertable="true" updatable="true" table="Scheduler" length="254"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="java.util.Date" v="true" name="courseDate" id="_1544623860545382">
+                <jpa:temporal>DATE</jpa:temporal>
+                <jpa:column name="CourseDate" unique="false" nullable="false" insertable="true" updatable="true" table="Scheduler"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="java.util.Date" v="true" name="endTime" id="_1544623860545383">
+                <jpa:temporal>TIME</jpa:temporal>
+                <jpa:column name="EndTime" unique="false" nullable="true" insertable="true" updatable="true" table="Scheduler"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="member" id="_1544623860545384">
+                <jpa:column name="Member" unique="false" nullable="false" insertable="true" updatable="true" table="Scheduler" length="254"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="ort" id="_1544623860545385">
+                <jpa:column name="Ort" unique="false" nullable="true" insertable="true" updatable="true" table="Scheduler"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="java.util.Date" v="true" name="startTime" id="_1544623860561386">
+                <jpa:temporal>TIME</jpa:temporal>
+                <jpa:column name="StartTime" unique="false" nullable="false" insertable="true" updatable="true" table="Scheduler"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="teacher" id="_1544623860561387">
+                <jpa:column name="Teacher" unique="false" nullable="true" insertable="true" updatable="true" table="Scheduler" length="254"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="type" id="_1544623860561388">
+                <jpa:column name="Type" unique="false" nullable="true" insertable="true" updatable="true" table="Scheduler" length="50"/>
+            </jpa:basic>
+            <jpa:id attribute-type="String" v="true" name="id" id="_1544623860545380">
+                <jpa:column name="ID" unique="false" nullable="false" insertable="true" updatable="true" table="Scheduler" length="254"/>
+                <jpa:generated-value strategy="DEFAULT"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Scheduler">
+            <jpa:unique-constraint>
+                <jpa:column-name>Member</jpa:column-name>
+                <jpa:column-name>CourseDate</jpa:column-name>
+                <jpa:column-name>StartTime</jpa:column-name>
+            </jpa:unique-constraint>
+        </jpa:table>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="TeachersResultsPK" abs="false" class="TeachersResults" v="true" xre="false" m="false" rootElement="_1544623860545348" id="_1544623860545353">
+        <jpa:removedAttributes>
+            <jpa:i>groupsStudents</jpa:i>
+        </jpa:removedAttributes>
+        <jpa:attributes>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="teachers" id="_1544623860561389">
+                <jpa:column name="Teachers" unique="false" nullable="false" insertable="true" updatable="true" table="Teachers_Results" length="254"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="results" id="_1544623860561391">
+                <jpa:column name="Results" unique="false" nullable="true" insertable="true" updatable="true" table="Teachers_Results" length="254"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="elementKey" id="_1544623860561392">
+                <jpa:column name="element_key" unique="false" nullable="false" insertable="true" updatable="true" table="Teachers_Results" length="50"/>
+            </jpa:basic>
+            <jpa:id attribute-type="String" v="true" name="id" id="_1544623860561390">
+                <jpa:column name="ID" unique="false" nullable="false" insertable="true" updatable="true" table="Teachers_Results" length="254"/>
+                <jpa:generated-value strategy="DEFAULT"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Teachers_Results">
+            <jpa:unique-constraint>
+                <jpa:column-name>Teachers</jpa:column-name>
+                <jpa:column-name>element_key</jpa:column-name>
+            </jpa:unique-constraint>
+        </jpa:table>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="StaffPK" abs="false" class="Staff" v="true" xre="false" m="false" rootElement="_1544623860545348" id="_1544623860545354">
+        <jpa:attributes>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="id" id="_1544623860561393">
+                <jpa:column name="ID" unique="false" nullable="false" insertable="true" updatable="true" table="Staff" length="254"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="extID" id="_1544623860561395">
+                <jpa:column name="extID" unique="false" nullable="true" insertable="true" updatable="true" table="Staff" length="50"/>
+            </jpa:basic>
+            <jpa:id attribute-type="String" v="true" name="person" id="_1544623860561394">
+                <jpa:column name="Person" unique="false" nullable="false" insertable="true" updatable="true" table="Staff" length="254"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Staff">
+            <jpa:unique-constraint>
+                <jpa:column-name>extID</jpa:column-name>
+            </jpa:unique-constraint>
+        </jpa:table>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="CoursesPK" abs="false" class="Courses" v="true" xre="false" m="false" rootElement="_1544623860545348" id="_1544623860545355">
+        <jpa:attributes>
+            <jpa:basic optional="false" attribute-type="int" v="true" name="kurs" id="_1544623860561396">
+                <jpa:column name="KURS" unique="false" nullable="false" insertable="true" updatable="true" table="Courses"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="kursname" id="_1544623860561397">
+                <jpa:column name="KURSNAME" unique="false" nullable="true" insertable="true" updatable="true" table="Courses" length="50"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="schulungsblock" id="_1544623860561398">
+                <jpa:column name="SCHULUNGSBLOCK" unique="false" nullable="true" insertable="true" updatable="true" table="Courses" length="50"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="dauer" id="_1544623860561399">
+                <jpa:column name="DAUER" unique="false" nullable="true" insertable="true" updatable="true" table="Courses" length="40"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="blockWeeks" id="_1544623860561400">
+                <jpa:column name="BlockWeeks" unique="false" nullable="true" insertable="true" updatable="true" table="Courses"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="blockung" id="_1544623860561401">
+                <jpa:column name="Blockung" unique="false" nullable="true" insertable="true" updatable="true" table="Courses"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="code" id="_1544623860561402">
+                <jpa:column name="Code" unique="false" nullable="true" insertable="true" updatable="true" table="Courses" length="50"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="color" id="_1544623860561403">
+                <jpa:column name="Color" unique="false" nullable="true" insertable="true" updatable="true" table="Courses"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="extID" id="_1544623860561404">
+                <jpa:column name="ExtID" unique="false" nullable="true" insertable="true" updatable="true" table="Courses" length="50"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="link" id="_1544623860561406">
+                <jpa:column name="Link" unique="false" nullable="true" insertable="true" updatable="true" table="Courses"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="sws" id="_1544623860561407">
+                <jpa:column name="SWS" unique="false" nullable="true" insertable="true" updatable="true" table="Courses"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="teacher" id="_1544623860561408">
+                <jpa:column name="Teacher" unique="false" nullable="true" insertable="true" updatable="true" table="Courses" length="254"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1544623860545364" connected-attribute-id="_1544623860561452" v="true" name="major" id="_1544623860561409">
+                <jpa:join-column name="MAJOR" rc="ID1" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="Integer" v="true" name="id" id="_1544623860561405">
+                <jpa:column name="ID" unique="false" nullable="false" insertable="true" updatable="true" table="Courses"/>
+                <jpa:generated-value strategy="DEFAULT"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Courses">
+            <jpa:unique-constraint>
+                <jpa:column-name>KURS</jpa:column-name>
+            </jpa:unique-constraint>
+        </jpa:table>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="ParticipantsPK" abs="false" class="Participants" v="true" xre="false" m="false" rootElement="_1544623860545348" id="_1544623860545356">
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="kurs" id="_1544623860561411">
+                <jpa:column name="KURS" unique="false" nullable="true" insertable="true" updatable="true" table="Participants"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="psnr" id="_1544623860561412">
+                <jpa:column name="PSNR" unique="false" nullable="true" insertable="true" updatable="true" table="Participants"/>
+            </jpa:basic>
+            <jpa:id attribute-type="Integer" v="true" name="id" id="_1544623860561410">
+                <jpa:column name="ID" unique="false" nullable="false" insertable="true" updatable="true" table="Participants"/>
+                <jpa:generated-value strategy="DEFAULT"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Participants"/>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="TeachersCoursesPK" abs="false" class="TeachersCourses" v="true" xre="false" m="false" rootElement="_1544623860545348" id="_1544623860545357">
+        <jpa:attributes>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="teachers" id="_1544623860561413">
+                <jpa:column name="Teachers" unique="false" nullable="false" insertable="true" updatable="true" table="Teachers_Courses" length="254"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="courses" id="_1544623860561415">
+                <jpa:column name="Courses" unique="false" nullable="true" insertable="true" updatable="true" table="Teachers_Courses" length="254"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="elementKey" id="_1544623860561416">
+                <jpa:column name="element_key" unique="false" nullable="false" insertable="true" updatable="true" table="Teachers_Courses" length="50"/>
+            </jpa:basic>
+            <jpa:id attribute-type="String" v="true" name="id" id="_1544623860561414">
+                <jpa:column name="ID" unique="false" nullable="false" insertable="true" updatable="true" table="Teachers_Courses" length="254"/>
+                <jpa:generated-value strategy="DEFAULT"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Teachers_Courses">
+            <jpa:unique-constraint>
+                <jpa:column-name>Teachers</jpa:column-name>
+                <jpa:column-name>element_key</jpa:column-name>
+            </jpa:unique-constraint>
+        </jpa:table>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="CoursesLocationsPK" abs="false" class="CoursesLocations" v="true" xre="false" m="false" rootElement="_1544623860545348" id="_1544623860545358">
+        <jpa:attributes>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="courses" id="_1544623860561417">
+                <jpa:column name="Courses" unique="false" nullable="false" insertable="true" updatable="true" table="Courses_Locations" length="254"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="locations" id="_1544623860561418">
+                <jpa:column name="Locations" unique="false" nullable="true" insertable="true" updatable="true" table="Courses_Locations"/>
+            </jpa:basic>
+            <jpa:id attribute-type="String" v="true" name="elementKey" id="_1544623860561419">
+                <jpa:column name="element_key" unique="false" nullable="false" insertable="true" updatable="true" table="Courses_Locations" length="50"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Courses_Locations">
+            <jpa:unique-constraint>
+                <jpa:column-name>Courses</jpa:column-name>
+                <jpa:column-name>element_key</jpa:column-name>
+            </jpa:unique-constraint>
+        </jpa:table>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="TeachersPK" abs="false" class="Teachers" v="true" xre="false" m="false" rootElement="_1544623860545348" id="_1544623860545359">
+        <jpa:attributes>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="id" id="_1544623860561420">
+                <jpa:column name="ID" unique="false" nullable="false" insertable="true" updatable="true" table="Teachers" length="254"/>
+            </jpa:basic>
+            <jpa:id attribute-type="String" v="true" name="staff" id="_1544623860561421">
+                <jpa:column name="Staff" unique="false" nullable="false" insertable="true" updatable="true" table="Teachers" length="254"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Teachers"/>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="StudentsPK" abs="false" class="Students" v="true" xre="false" m="false" rootElement="_1544623860545348" id="_1544623860545360">
+        <jpa:attributes>
+            <jpa:basic optional="false" attribute-type="int" v="true" name="id" id="_1544623860561422">
+                <jpa:column name="ID" unique="false" nullable="false" insertable="true" updatable="true" table="Students"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="extID" id="_1544623860561423">
+                <jpa:column name="ExtID" unique="false" nullable="true" insertable="true" updatable="true" table="Students" length="50"/>
+            </jpa:basic>
+            <jpa:id attribute-type="Integer" v="true" name="person" id="_1544623860561424">
+                <jpa:column name="Person" unique="false" nullable="false" insertable="true" updatable="true" table="Students"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Students">
+            <jpa:unique-constraint>
+                <jpa:column-name>ExtID</jpa:column-name>
+            </jpa:unique-constraint>
+        </jpa:table>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="ResultsPK" abs="false" class="Results" v="true" xre="false" m="false" rootElement="_1544623860545348" id="_1544623860545361">
+        <jpa:attributes>
+            <jpa:basic optional="false" attribute-type="int" v="true" name="student" id="_1544623860561425">
+                <jpa:column name="Student" unique="false" nullable="false" insertable="true" updatable="true" table="Results"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" xvt="" name="extID" id="_1544623860561427">
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:column name="ExtID" unique="false" nullable="true" insertable="true" updatable="true" table="Results" length="50"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="grade" id="_1544623860561428">
+                <jpa:column name="Grade" unique="false" nullable="true" insertable="true" updatable="true" table="Results" length="50"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="int" v="true" name="id" id="_1544623860561429">
+                <jpa:column name="ID" unique="false" nullable="false" insertable="true" updatable="true" table="Results"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="title" id="_1544623860561430">
+                <jpa:column name="Title" unique="false" nullable="true" insertable="true" updatable="true" table="Results" length="100"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="type" id="_1544623860561431">
+                <jpa:column name="Type" unique="false" nullable="true" insertable="true" updatable="true" table="Results" length="50"/>
+            </jpa:basic>
+            <jpa:id attribute-type="String" v="true" name="id1" id="_1544623860561426">
+                <jpa:column name="ID1" unique="false" nullable="false" insertable="true" updatable="true" table="Results" length="254"/>
+                <jpa:generated-value strategy="DEFAULT"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Results">
+            <jpa:unique-constraint>
+                <jpa:column-name>Student</jpa:column-name>
+                <jpa:column-name>ID</jpa:column-name>
+            </jpa:unique-constraint>
+        </jpa:table>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="DisposabilitiesPK" abs="false" class="Disposabilities" v="true" xre="false" m="false" rootElement="_1544623860545348" id="_1544623860545362">
+        <jpa:attributes>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="teacher" id="_1544623860561432">
+                <jpa:column name="Teacher" unique="false" nullable="false" insertable="true" updatable="true" table="Disposabilities" length="254"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="java.util.Date" v="true" name="endtime" id="_1544623860561434">
+                <jpa:temporal>TIME</jpa:temporal>
+                <jpa:column name="Endtime" unique="false" nullable="true" insertable="true" updatable="true" table="Disposabilities"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="java.util.Date" v="true" name="starttime" id="_1544623860561435">
+                <jpa:temporal>TIME</jpa:temporal>
+                <jpa:column name="Starttime" unique="false" nullable="false" insertable="true" updatable="true" table="Disposabilities"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="java.util.Date" v="true" name="workday" id="_1544623860561436">
+                <jpa:temporal>DATE</jpa:temporal>
+                <jpa:column name="Workday" unique="false" nullable="false" insertable="true" updatable="true" table="Disposabilities"/>
+            </jpa:basic>
+            <jpa:id attribute-type="String" v="true" name="id" id="_1544623860561433">
+                <jpa:column name="ID" unique="false" nullable="false" insertable="true" updatable="true" table="Disposabilities" length="254"/>
+                <jpa:generated-value strategy="DEFAULT"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Disposabilities">
+            <jpa:unique-constraint>
+                <jpa:column-name>Teacher</jpa:column-name>
+                <jpa:column-name>Workday</jpa:column-name>
+                <jpa:column-name>Starttime</jpa:column-name>
+            </jpa:unique-constraint>
+        </jpa:table>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="GroupsPK" abs="false" class="Groups" v="true" xre="false" m="false" rootElement="_1544623860545348" id="_1544623860545363">
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="id" id="_1544623860561438">
+                <jpa:column name="ID" unique="false" nullable="true" insertable="true" updatable="true" table="Groups" length="50"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="int" v="true" name="childsub" id="_1544623860561439">
+                <jpa:column name="childsub" unique="false" nullable="false" insertable="true" updatable="true" table="Groups"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1544623860545367" connected-attribute-id="_1544623860561467" v="true" name="class1" id="_1544623860561440">
+                <jpa:join-column name="CLASS" rc="ID1" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1544623860545368" connected-attribute-id="_1544623860561472" v="true" name="groupsStudentsCollection" id="_1544623860561441"/>
+            <jpa:id attribute-type="String" v="true" name="id1" id="_1544623860561437">
+                <jpa:column name="ID1" unique="false" nullable="false" insertable="true" updatable="true" table="Groups" length="254"/>
+                <jpa:generated-value strategy="DEFAULT"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Groups">
+            <jpa:unique-constraint>
+                <jpa:column-name>Class</jpa:column-name>
+                <jpa:column-name>childsub</jpa:column-name>
+            </jpa:unique-constraint>
+        </jpa:table>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="MajorsPK" abs="false" class="Majors" v="true" xre="false" m="false" rootElement="_1544623860545348" id="_1544623860545364">
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="colorDependency" id="_1544623860561443">
+                <jpa:column name="ColorDependency" unique="false" nullable="true" insertable="true" updatable="true" table="Majors"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="countSemesters" id="_1544623860561444">
+                <jpa:column name="CountSemesters" unique="false" nullable="true" insertable="true" updatable="true" table="Majors"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="id" id="_1544623860561445">
+                <jpa:column name="ID" unique="false" nullable="false" insertable="true" updatable="true" table="Majors" length="50"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Boolean" v="true" name="midday" id="_1544623860561446">
+                <jpa:column name="Midday" unique="false" nullable="true" insertable="true" updatable="true" table="Majors"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="java.util.Date" v="true" name="middayEnde" id="_1544623860561447">
+                <jpa:temporal>TIME</jpa:temporal>
+                <jpa:column name="MiddayEnde" unique="false" nullable="true" insertable="true" updatable="true" table="Majors"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="java.util.Date" v="true" name="middayStart" id="_1544623860561448">
+                <jpa:temporal>TIME</jpa:temporal>
+                <jpa:column name="MiddayStart" unique="false" nullable="true" insertable="true" updatable="true" table="Majors"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="pauseDuration" id="_1544623860561449">
+                <jpa:column name="PauseDuration" unique="false" nullable="true" insertable="true" updatable="true" table="Majors"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="rasterMinutes" id="_1544623860561450">
+                <jpa:column name="RasterMinutes" unique="false" nullable="true" insertable="true" updatable="true" table="Majors"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="java.util.Date" v="true" name="startTime" id="_1544623860561451">
+                <jpa:temporal>TIME</jpa:temporal>
+                <jpa:column name="StartTime" unique="false" nullable="true" insertable="true" updatable="true" table="Majors"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1544623860545350" connected-attribute-id="_1544623860545375" v="true" name="department" id="_1544623860561453">
+                <jpa:join-column name="DEPARTMENT" rc="ID" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1544623860545355" connected-attribute-id="_1544623860561409" v="true" name="coursesCollection" id="_1544623860561452"/>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1544623860545367" connected-attribute-id="_1544623860561468" v="true" name="classesCollection" id="_1544623860561454"/>
+            <jpa:id attribute-type="String" v="true" name="id1" id="_1544623860561442">
+                <jpa:column name="ID1" unique="false" nullable="false" insertable="true" updatable="true" table="Majors" length="254"/>
+                <jpa:generated-value strategy="DEFAULT"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Majors">
+            <jpa:unique-constraint>
+                <jpa:column-name>Department</jpa:column-name>
+                <jpa:column-name>ID</jpa:column-name>
+            </jpa:unique-constraint>
+        </jpa:table>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="SchoolsPK" abs="false" class="Schools" v="true" xre="false" m="false" rootElement="_1544623860545348" id="_1544623860545365">
+        <jpa:attributes>
+            <jpa:basic optional="false" attribute-type="int" v="true" name="id" id="_1544623860561455">
+                <jpa:column name="ID" unique="false" nullable="false" insertable="true" updatable="true" table="Schools"/>
+            </jpa:basic>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1544623860545350" connected-attribute-id="_1544623860545374" v="true" name="departmentsCollection" id="_1544623860561457"/>
+            <jpa:id attribute-type="Integer" v="true" name="org" id="_1544623860561456">
+                <jpa:column name="Org" unique="false" nullable="false" insertable="true" updatable="true" table="Schools"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Schools"/>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="SubjectsPK" abs="false" class="Subjects" v="true" xre="false" m="false" rootElement="_1544623860545348" id="_1544623860545366">
+        <jpa:attributes>
+            <jpa:basic optional="false" attribute-type="int" v="true" name="school" id="_1544623860561458">
+                <jpa:column name="School" unique="false" nullable="false" insertable="true" updatable="true" table="Subjects"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="id" id="_1544623860561460">
+                <jpa:column name="ID" unique="false" nullable="false" insertable="true" updatable="true" table="Subjects" length="50"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="String" v="true" name="name" id="_1544623860561461">
+                <jpa:column name="Name" unique="false" nullable="true" insertable="true" updatable="true" table="Subjects" length="100"/>
+            </jpa:basic>
+            <jpa:id attribute-type="String" v="true" name="id1" id="_1544623860561459">
+                <jpa:column name="ID1" unique="false" nullable="false" insertable="true" updatable="true" table="Subjects" length="254"/>
+                <jpa:generated-value strategy="DEFAULT"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Subjects">
+            <jpa:unique-constraint>
+                <jpa:column-name>School</jpa:column-name>
+                <jpa:column-name>ID</jpa:column-name>
+            </jpa:unique-constraint>
+        </jpa:table>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="ClassesPK" abs="false" class="Classes" v="true" xre="false" m="false" rootElement="_1544623860545348" id="_1544623860545367">
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="countSemester" id="_1544623860561463">
+                <jpa:column name="CountSemester" unique="false" nullable="true" insertable="true" updatable="true" table="Classes"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="id" id="_1544623860561464">
+                <jpa:column name="ID" unique="false" nullable="false" insertable="true" updatable="true" table="Classes" length="50"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="maxStudents" id="_1544623860561465">
+                <jpa:column name="MaxStudents" unique="false" nullable="true" insertable="true" updatable="true" table="Classes"/>
+            </jpa:basic>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="startYear" id="_1544623860561466">
+                <jpa:column name="StartYear" unique="false" nullable="true" insertable="true" updatable="true" table="Classes"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1544623860545364" connected-attribute-id="_1544623860561454" v="true" name="major" id="_1544623860561468">
+                <jpa:join-column name="MAJOR" rc="ID1" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:one-to-many own="false" collection-type="java.util.List" connected-entity-id="_1544623860545363" connected-attribute-id="_1544623860561440" v="true" name="groupsCollection" id="_1544623860561467"/>
+            <jpa:id attribute-type="String" v="true" name="id1" id="_1544623860561462">
+                <jpa:column name="ID1" unique="false" nullable="false" insertable="true" updatable="true" table="Classes" length="254"/>
+                <jpa:generated-value strategy="DEFAULT"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Classes">
+            <jpa:unique-constraint>
+                <jpa:column-name>Major</jpa:column-name>
+                <jpa:column-name>ID</jpa:column-name>
+            </jpa:unique-constraint>
+        </jpa:table>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="GroupsStudentsPK" abs="false" class="GroupsStudents" v="true" xre="false" m="false" rootElement="_1544623860545348" id="_1544623860545368">
+        <jpa:attributes>
+            <jpa:basic optional="true" attribute-type="Integer" v="true" name="students" id="_1544623860561470">
+                <jpa:column name="Students" unique="false" nullable="true" insertable="true" updatable="true" table="Groups_Students"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="elementKey" id="_1544623860561471">
+                <jpa:column name="element_key" unique="false" nullable="false" insertable="true" updatable="true" table="Groups_Students" length="50"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="false" primaryKey="false" connected-entity-id="_1544623860545363" connected-attribute-id="_1544623860561441" v="true" name="groups" id="_1544623860561472">
+                <jpa:join-column name="GROUPS" rc="ID1" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="String" v="true" name="id" id="_1544623860561469">
+                <jpa:column name="ID" unique="false" nullable="false" insertable="true" updatable="true" table="Groups_Students" length="254"/>
+                <jpa:generated-value strategy="DEFAULT"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table name="Groups_Students">
+            <jpa:unique-constraint>
+                <jpa:column-name>Groups</jpa:column-name>
+                <jpa:column-name>element_key</jpa:column-name>
+            </jpa:unique-constraint>
+        </jpa:table>
+    </jpa:entity>
+    <jpa:wsl>
+        <jpa:ws n="Main" id="_1544623860701473">
+            <i ref="_1544623860545351" x="112" y="2113"/>
+            <i ref="_1544623860545362" x="741" y="236"/>
+            <i ref="_1544623860545352" x="536" y="632"/>
+            <i ref="_1544623860545363" x="295" y="420"/>
+            <i ref="_1544623860545360" x="-166" y="836"/>
+            <i ref="_1544623860545350" x="92" y="20"/>
+            <i ref="_1544623860545361" x="92" y="732"/>
+            <i ref="_1544623860545355" x="546" y="20"/>
+            <i ref="_1544623860545366" x="774" y="33"/>
+            <i ref="_1544623860545356" x="317" y="669"/>
+            <i ref="_1544623860545367" x="59" y="208"/>
+            <i ref="_1544623860545353" x="-169" y="481"/>
+            <i ref="_1544623860545364" x="317" y="20"/>
+            <i ref="_1544623860545354" x="-166" y="167"/>
+            <i ref="_1544623860545365" x="-171" y="20"/>
+            <i ref="_1544623860545359" x="-166" y="328"/>
+            <i ref="_1544623860545349" x="554" y="448"/>
+            <i ref="_1544623860545357" x="-169" y="684"/>
+            <i ref="_1544623860545368" x="50" y="522"/>
+            <i ref="_1544623860545358" x="741" y="448"/>
+        </jpa:ws>
+    </jpa:wsl>
+</jpa:entity-mappings>
