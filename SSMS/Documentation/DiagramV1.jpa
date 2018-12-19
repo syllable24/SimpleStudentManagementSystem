@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" v="5.2" rws="_1544623860701473" cws="_1544623860701473" persistenceUnitName="DEFAULT_PU" sm="false" xs="false" id="_1544623860545348" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
+<jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" v="5.2" rws="_1544623860701473" Pws="_1544623860701473" cws="_1544623860701473" persistenceUnitName="DEFAULT_PU" sm="false" xs="false" id="_1544623860545348" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
     <jpa:entity compositePrimaryKeyClass="CoursesGroupsPK" abs="false" class="CoursesGroups" v="true" xre="false" m="false" rootElement="_1544623860545348" id="_1544623860545349">
         <jpa:attributes>
             <jpa:basic optional="false" attribute-type="String" v="true" name="courses" id="_1544623860545369">
@@ -76,7 +76,9 @@
                 <jpa:temporal>TIME</jpa:temporal>
                 <jpa:column name="EndTime" unique="false" nullable="true" insertable="true" updatable="true" table="Scheduler"/>
             </jpa:basic>
-            <jpa:basic optional="false" attribute-type="String" v="true" name="member" id="_1544623860545384">
+            <jpa:basic optional="false" attribute-type="String" v="true" xvt="" name="member" id="_1544623860545384">
+                <jpa:xwm/>
+                <jpa:xm/>
                 <jpa:column name="Member" unique="false" nullable="false" insertable="true" updatable="true" table="Scheduler" length="254"/>
             </jpa:basic>
             <jpa:basic optional="true" attribute-type="Integer" v="true" name="ort" id="_1544623860545385">
@@ -514,7 +516,7 @@
     </jpa:entity>
     <jpa:wsl>
         <jpa:ws n="Main" id="_1544623860701473">
-            <i ref="_1544623860545351" x="112" y="2113"/>
+            <i ref="_1544623860545351" x="290" y="826"/>
             <i ref="_1544623860545362" x="741" y="236"/>
             <i ref="_1544623860545352" x="536" y="632"/>
             <i ref="_1544623860545363" x="295" y="420"/>
@@ -533,7 +535,7 @@
             <i ref="_1544623860545349" x="554" y="448"/>
             <i ref="_1544623860545357" x="-169" y="684"/>
             <i ref="_1544623860545368" x="50" y="522"/>
-            <i ref="_1544623860545358" x="741" y="448"/>
+            <i ref="_1544623860545358" x="751" y="431"/>
         </jpa:ws>
     </jpa:wsl>
 </jpa:entity-mappings>
