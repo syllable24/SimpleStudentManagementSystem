@@ -76,10 +76,8 @@
                 <jpa:temporal>TIME</jpa:temporal>
                 <jpa:column name="EndTime" unique="false" nullable="true" insertable="true" updatable="true" table="Scheduler"/>
             </jpa:basic>
-            <jpa:basic optional="false" attribute-type="String" v="true" xvt="" name="member" id="_1544623860545384">
-                <jpa:xwm/>
-                <jpa:xm/>
-                <jpa:column name="Member" unique="false" nullable="false" insertable="true" updatable="true" table="Scheduler" length="254"/>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="participant" id="_1544623860545384">
+                <jpa:column name="Participant" unique="false" nullable="false" insertable="true" updatable="true" table="Scheduler" length="254"/>
             </jpa:basic>
             <jpa:basic optional="true" attribute-type="Integer" v="true" name="ort" id="_1544623860545385">
                 <jpa:column name="Ort" unique="false" nullable="true" insertable="true" updatable="true" table="Scheduler"/>
@@ -101,7 +99,7 @@
         </jpa:attributes>
         <jpa:table name="Scheduler">
             <jpa:unique-constraint>
-                <jpa:column-name>Member</jpa:column-name>
+                <jpa:column-name>Participant</jpa:column-name>
                 <jpa:column-name>CourseDate</jpa:column-name>
                 <jpa:column-name>StartTime</jpa:column-name>
             </jpa:unique-constraint>
@@ -516,7 +514,7 @@
     </jpa:entity>
     <jpa:wsl>
         <jpa:ws n="Main" id="_1544623860701473">
-            <i ref="_1544623860545351" x="290" y="826"/>
+            <i ref="_1544623860545351" x="282" y="818"/>
             <i ref="_1544623860545362" x="741" y="236"/>
             <i ref="_1544623860545352" x="536" y="632"/>
             <i ref="_1544623860545363" x="295" y="420"/>
