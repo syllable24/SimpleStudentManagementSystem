@@ -1,0 +1,59 @@
+
+body {
+	font-family: sans-serif; width: auto; max-width: 60em;
+}
+.blue { background-color: #607080; }
+.color1,.color2,.color3,.color4,.color5 { background-color: #7BB037; z-index: 1}
+.commandbar {  margin-left: 3em; padding: 2px; width:95%; cursor: hand;}
+#menu, #menuv, #menu ul, #menuv ul
+      { cursor: pointer; background-color: #00000000; position: absolute; bottom: 0px;
+        display: flex; flex-wrap: wrap-reverse; margin: 0;
+      }
+#menu LI
+	{ display: flex;
+	  FLOAT: left; position: relative; padding: 0.3em 0 0 0.3em; 
+	  width: 10em; HEIGHT: 1.5em; margin: 0 0 0 0.2em; 
+      BORDER-RADIUS: 0.5em 0.4em 0 0;
+      LINE-HEIGHT: 0.9em;
+}
+#menuv LI {
+      WIDTH: 10em; POSITION: relative; LEFT: 0em; 
+      TEXT-ALIGN: left; HEIGHT: 1.5em; 
+}
+#menu LI A, #menuv LI A {
+		COLOR: white; text-align: left; padding: 0.3em 0em 0.2em 0.8em; width: 91%;  
+		BORDER-RADIUS: 0.3em 0.1em 0 0; box-shadow: -0.2em -0.2em 0.4em; height: 1.2em;
+}
+#menu UL.sub { DISPLAY: none; POSITION: absolute; TOP: 100%; padding: 0 1.1em 0 0.3em; LEFT: 0; height: 1em; 
+}
+#menuv UL.sub {	LEFT: 0em; height: 1em; }
+
+#menu LI LI {
+	  border-radius: 0; 
+}
+#menu LI LI a, 
+#menuv LI LI A  {
+		COLOR: black;
+}
+#menu .sub LI, 
+#menuv .sub LI {
+        color: #303030; BACKGROUND-COLOR: #CBFF87; width: 100%;
+        MARGIN: 0; padding: 0.3em 0 0.3em 1em; height: 100%;
+        text-align: left; BORDER:  grey 1px solid; 
+}
+
+#menu UL.sub1 {
+		DISPLAY: none; TOP: 0%; POSITION: absolute; LEFT: 100%; padding: 0; height: 1em;
+}
+
+#menu .sub LI IMG,
+#menu .sub1 LI IMG { RIGHT: 0; position: absolute; padding-top:0.3em;
+					 height: 1em;
+}
+
+#menu li:hover > ul { DISPLAY: block;}
+
+#menu li ul li:hover,
+#menu li ul li:hover a { background-color: grey; color: yellow; 
+						 border-color: white;  border-left-color:grey; border-right-color:grey;}
+

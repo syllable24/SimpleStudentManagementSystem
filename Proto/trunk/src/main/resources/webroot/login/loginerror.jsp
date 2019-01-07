@@ -1,0 +1,1 @@
+<html><body>Anmeldung nicht erfolgreich<br><a href='login.jsp'>Anmelden</a></body></html>
