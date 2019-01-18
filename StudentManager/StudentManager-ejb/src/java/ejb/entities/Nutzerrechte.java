@@ -1,5 +1,6 @@
 package ejb.entities;
 
+import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +11,7 @@ import javax.persistence.OneToOne;
  * @author ralph
  */
 @Entity
-public class Nutzerrechte {
+public class Nutzerrechte implements Serializable {
 
     @Id
     @GeneratedValue

@@ -6,15 +6,23 @@
 package ejb.message;
 
 import ejb.entities.Studenten;
+import ejb.entities.Studiengaenge;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.Resource;
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
+import javax.ejb.MessageDrivenContext;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.ObjectMessage;
 import javax.jms.TextMessage;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -25,6 +33,12 @@ import javax.jms.TextMessage;
     ,@ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue")
 })
 public class TestMessageBean implements MessageListener {
+
+    @Resource
+    private MessageDrivenContext mdc;    
+    @PersistenceContext(unitName = "StudentManager-ejbPU")
+    private EntityManager em;
+    
     
     public TestMessageBean() {
     }
@@ -34,12 +48,18 @@ public class TestMessageBean implements MessageListener {
         try {
             ObjectMessage objm;
             objm = (ObjectMessage) message;
-            Studenten st = (Studenten) objm.getObject();
-            System.out.println("---------------->>> " + st.getNachname() + "; " + st.getVorname());
+            Studiengaenge st = (Studiengaenge) objm.getObject();
+            System.out.println("---------------->>> " + st.getBezeichnung());                                                
+            persist(st);
+            
         } catch (JMSException ex) {
+            mdc.setRollbackOnly();
             Logger.getLogger(TestMessageBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        }       
+    }
+
+    public void persist(Object object) {
+        em.persist(object);
     }
     
 }

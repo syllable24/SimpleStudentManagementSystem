@@ -1,5 +1,6 @@
 package ejb.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
@@ -12,7 +13,7 @@ import javax.persistence.OneToMany;
  * @author ralph
  */
 @Entity
-public class Gruppen {
+public class Gruppen implements Serializable {
 
     @Id
     @GeneratedValue
