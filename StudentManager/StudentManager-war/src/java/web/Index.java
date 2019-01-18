@@ -1,14 +1,11 @@
 package web;
 
 import ejb.entities.Studenten;
+import ejb.entities.StudentenFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.Resource;
-import javax.inject.Inject;
-import javax.jms.JMSConnectionFactory;
-import javax.jms.JMSContext;
 import javax.jms.JMSException;
 import javax.jms.ObjectMessage;
 import javax.jms.Queue;
@@ -17,7 +14,6 @@ import javax.jms.QueueConnectionFactory;
 import javax.jms.QueueSender;
 import javax.jms.QueueSession;
 import javax.jms.Session;
-import javax.jms.TextMessage;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -47,7 +43,7 @@ public class Index extends HttpServlet {
             throws ServletException, IOException {               
             
         try {
-            String studentVorname = request.getParameter("StudentVorname");
+            String studentVorname  = request.getParameter("StudentVorname");
             String studentNachname = request.getParameter("StudentNachname");
             
             if ((studentVorname != null) && (studentNachname != null)){                                        
@@ -65,7 +61,9 @@ public class Index extends HttpServlet {
                 st.setVorname(studentVorname);
                 ObjectMessage bjm = ses.createObjectMessage(st);
 
-                queueSender.send(bjm);
+                queueSender.send(bjm);                                
+                
+                
             }
             
         } catch (NamingException | JMSException ex) {
@@ -130,5 +128,4 @@ public class Index extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

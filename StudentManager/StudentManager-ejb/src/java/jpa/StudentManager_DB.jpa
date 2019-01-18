@@ -16,19 +16,15 @@
                 <jpa:xm/>
                 <jpa:temporal>DATE</jpa:temporal>
             </jpa:basic>
-            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_1547632903930525" connected-attribute-id="_1547632947196531" v="true" xvt="" name="studiengaenge" id="_1547632947194530">
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_1547632903930525" connected-attribute-id="_1547743397349401" v="true" xvt="" name="studiengaenge" id="_1547743397347400">
                 <jpa:xwm/>
                 <jpa:xm/>
             </jpa:many-to-one>
-            <jpa:one-to-one own="true" orp="false" optional="true" primaryKey="false" connected-entity-id="_1547633023820532" connected-attribute-id="_1547633080604542" v="true" xvt="" name="logIn_ID" id="_1547633080603541">
+            <jpa:one-to-one own="true" orp="false" optional="true" primaryKey="false" connected-entity-id="_1547633023820532" connected-attribute-id="_1547633080604542" v="true" xvt="" name="logIn" id="_1547633080603541">
                 <jpa:xwm/>
                 <jpa:xm/>
             </jpa:one-to-one>
-            <jpa:many-to-many own="true" collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_1547632456171499" connected-attribute-id="_1547632487168505" v="true" xvt="" name="kurse_ids" id="_1547632487165504">
-                <jpa:xwm/>
-                <jpa:xm/>
-            </jpa:many-to-many>
-            <jpa:many-to-many own="true" collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_1547632593208515" connected-attribute-id="_1547632839437521" v="true" xvt="" name="gruppen_ids" id="_1547632839435520">
+            <jpa:many-to-many own="true" collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_1547743120897299" v="true" xvt="" name="kursZuGruppe" id="_1547743221111318">
                 <jpa:xwm/>
                 <jpa:xm/>
             </jpa:many-to-many>
@@ -58,14 +54,10 @@
                 <jpa:xwm/>
                 <jpa:xm/>
             </jpa:basic>
-            <jpa:many-to-many collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_1547632413676493" connected-attribute-id="_1547632487165504" v="true" xvt="" name="studenten_ids" id="_1547632487168505">
+            <jpa:one-to-many orp="false" collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_1547743120897299" connected-attribute-id="_1547743163659309" v="true" xvt="" name="kursZuGruppe" id="_1547743163661310">
                 <jpa:xwm/>
                 <jpa:xm/>
-            </jpa:many-to-many>
-            <jpa:many-to-many collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_1547632498066506" connected-attribute-id="_1547632549105513" v="true" xvt="" name="lehrer_ids" id="_1547632549107514">
-                <jpa:xwm/>
-                <jpa:xm/>
-            </jpa:many-to-many>
+            </jpa:one-to-many>
             <jpa:id attribute-type="Long" v="true" xvt="" name="id" id="_1547632456171500">
                 <jpa:xwm/>
                 <jpa:xm/>
@@ -95,15 +87,11 @@
                 <jpa:xm/>
                 <jpa:temporal>DATE</jpa:temporal>
             </jpa:basic>
-            <jpa:one-to-one own="true" orp="false" optional="true" primaryKey="false" connected-entity-id="_1547633023820532" connected-attribute-id="_1547633054826539" v="true" xvt="" name="logIn_ID" id="_1547633054825538">
+            <jpa:one-to-one own="true" orp="false" optional="true" primaryKey="false" connected-entity-id="_1547633023820532" connected-attribute-id="_1547633054826539" v="true" xvt="" name="logIn" id="_1547633054825538">
                 <jpa:xwm/>
                 <jpa:xm/>
             </jpa:one-to-one>
-            <jpa:many-to-many own="true" collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_1547632456171499" connected-attribute-id="_1547632549107514" v="true" xvt="" name="kurse_ids" id="_1547632549105513">
-                <jpa:xwm/>
-                <jpa:xm/>
-            </jpa:many-to-many>
-            <jpa:many-to-many own="true" collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_1547632593208515" connected-attribute-id="_1547632867185524" v="true" xvt="" name="gruppen_ids" id="_1547632867181523">
+            <jpa:many-to-many own="true" collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_1547743120897299" v="true" xvt="" name="kursZuGruppe" id="_1547743238888320">
                 <jpa:xwm/>
                 <jpa:xm/>
             </jpa:many-to-many>
@@ -133,14 +121,10 @@
                 <jpa:xwm/>
                 <jpa:xm/>
             </jpa:basic>
-            <jpa:many-to-many collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_1547632413676493" connected-attribute-id="_1547632839435520" v="true" xvt="" name="studenten_ids" id="_1547632839437521">
+            <jpa:one-to-many orp="false" collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_1547743120897299" connected-attribute-id="_1547743177165312" v="true" xvt="" name="kursZuGruppe" id="_1547743177167313">
                 <jpa:xwm/>
                 <jpa:xm/>
-            </jpa:many-to-many>
-            <jpa:many-to-many collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_1547632498066506" connected-attribute-id="_1547632867181523" v="true" xvt="" name="lehrer_ids" id="_1547632867185524">
-                <jpa:xwm/>
-                <jpa:xm/>
-            </jpa:many-to-many>
+            </jpa:one-to-many>
             <jpa:id attribute-type="Long" v="true" xvt="" name="id" id="_1547632593208516">
                 <jpa:xwm/>
                 <jpa:xm/>
@@ -161,7 +145,7 @@
                 <jpa:xwm/>
                 <jpa:xm/>
             </jpa:basic>
-            <jpa:one-to-many orp="false" collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_1547632413676493" connected-attribute-id="_1547632947194530" v="true" xvt="" name="studenten_ids" id="_1547632947196531">
+            <jpa:one-to-many orp="false" collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_1547632413676493" connected-attribute-id="_1547743397347400" v="true" xvt="" name="student" id="_1547743397349401">
                 <jpa:xwm/>
                 <jpa:xm/>
             </jpa:one-to-many>
@@ -189,15 +173,15 @@
                 <jpa:xwm/>
                 <jpa:xm/>
             </jpa:basic>
-            <jpa:one-to-one orp="false" optional="true" primaryKey="false" connected-entity-id="_1547632498066506" connected-attribute-id="_1547633054825538" v="true" xvt="" name="lehrer_ID" id="_1547633054826539">
+            <jpa:one-to-one orp="false" optional="true" primaryKey="false" connected-entity-id="_1547632498066506" connected-attribute-id="_1547633054825538" v="true" xvt="" name="lehrer" id="_1547633054826539">
                 <jpa:xwm/>
                 <jpa:xm/>
             </jpa:one-to-one>
-            <jpa:one-to-one orp="false" optional="true" primaryKey="false" connected-entity-id="_1547632413676493" connected-attribute-id="_1547633080603541" v="true" xvt="" name="student_ID" id="_1547633080604542">
+            <jpa:one-to-one orp="false" optional="true" primaryKey="false" connected-entity-id="_1547632413676493" connected-attribute-id="_1547633080603541" v="true" xvt="" name="student" id="_1547633080604542">
                 <jpa:xwm/>
                 <jpa:xm/>
             </jpa:one-to-one>
-            <jpa:one-to-one orp="false" optional="true" primaryKey="false" connected-entity-id="_1547633105710543" connected-attribute-id="_1547633129621549" v="true" xvt="" name="nutzerrecht_ID" id="_1547633129623550">
+            <jpa:one-to-one orp="false" optional="true" primaryKey="false" connected-entity-id="_1547633105710543" connected-attribute-id="_1547633129621549" v="true" xvt="" name="nutzerrecht" id="_1547633129623550">
                 <jpa:xwm/>
                 <jpa:xm/>
             </jpa:one-to-one>
@@ -228,7 +212,7 @@
                 <jpa:xwm/>
                 <jpa:xm/>
             </jpa:basic>
-            <jpa:one-to-one own="true" orp="false" optional="true" primaryKey="false" connected-entity-id="_1547633023820532" connected-attribute-id="_1547633129623550" v="true" xvt="" name="logIn_ID" id="_1547633129621549">
+            <jpa:one-to-one own="true" orp="false" optional="true" primaryKey="false" connected-entity-id="_1547633023820532" connected-attribute-id="_1547633129623550" v="true" xvt="" name="logIn" id="_1547633129621549">
                 <jpa:xwm/>
                 <jpa:xm/>
             </jpa:one-to-one>
@@ -248,6 +232,36 @@
             <jpa:query>Select n from Nutzerrechte n where n.Schreiben=:Schreiben</jpa:query>
         </jpa:nq>
     </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="KurseZuGruppenPK" abs="false" class="KurseZuGruppen" v="true" jbn="false" xre="false" m="false" rootElement="_15475902159427" id="_1547743120897299">
+        <jpa:ath>ralph</jpa:ath>
+        <jpa:attributes>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_1547632456171499" connected-attribute-id="_1547743163661310" v="true" xvt="" name="kurs" id="_1547743163659309">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_1547632593208515" connected-attribute-id="_1547743177167313" v="true" xvt="" name="gruppe" id="_1547743177165312">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="Long" v="true" xvt="" name="id" id="_1547743120897300">
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:generated-value strategy="DEFAULT"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="KurseZuGruppen.findAll">
+            <jpa:query>Select e from KurseZuGruppen e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="KurseZuGruppen.findByVorname">
+            <jpa:query>Select s from KurseZuGruppen s where s.Vorname=:Vorname</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="KurseZuGruppen.findByNachname">
+            <jpa:query>Select s from KurseZuGruppen s where s.Nachname=:Nachname</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="KurseZuGruppen.findByGeburtsdatum">
+            <jpa:query>Select s from KurseZuGruppen s where s.Geburtsdatum=:Geburtsdatum</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
     <jpa:c>
         <ct>java.util.List</ct>
         <ct>java.util.Set</ct>
@@ -261,13 +275,14 @@
     </jpa:c>
     <jpa:wsl>
         <jpa:ws n="Main" id="_15475902159428">
-            <i ref="_1547632593208515" x="62" y="55"/>
-            <i ref="_1547632903930525" x="633" y="13"/>
-            <i ref="_1547633023820532" x="674" y="193"/>
-            <i ref="_1547632456171499" x="374" y="301"/>
-            <i ref="_1547632498066506" x="69" y="281"/>
-            <i ref="_1547633105710543" x="660" y="404"/>
-            <i ref="_1547632413676493" x="349" y="35"/>
+            <i ref="_1547632593208515" x="35" y="54"/>
+            <i ref="_1547632903930525" x="773" y="37"/>
+            <i ref="_1547633023820532" x="854" y="274"/>
+            <i ref="_1547632456171499" x="481" y="80"/>
+            <i ref="_1547632498066506" x="63" y="261"/>
+            <i ref="_1547633105710543" x="903" y="496"/>
+            <i ref="_1547632413676493" x="545" y="251"/>
+            <i ref="_1547743120897299" x="233" y="108"/>
         </jpa:ws>
     </jpa:wsl>
 </jpa:entity-mappings>

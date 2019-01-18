@@ -22,14 +22,14 @@ public class LogIns {
     @Basic
     private String PasswortMD5;
 
-    @OneToOne(mappedBy = "logIn_ID")
-    private Lehrer lehrer_ID;
+    @OneToOne(mappedBy = "logIn")
+    private Lehrer lehrer;
 
-    @OneToOne(mappedBy = "logIn_ID")
-    private Studenten student_ID;
+    @OneToOne(mappedBy = "logIn")
+    private Studenten student;
 
-    @OneToOne(mappedBy = "logIn_ID")
-    private Nutzerrechte nutzerrecht_ID;
+    @OneToOne(mappedBy = "logIn")
+    private Nutzerrechte nutzerrecht;
 
     public Long getId() {
         return id;
@@ -55,28 +55,28 @@ public class LogIns {
         this.PasswortMD5 = PasswortMD5;
     }
 
-    public Lehrer getLehrer_ID() {
-        return lehrer_ID;
+    public Lehrer getLehrer() {
+        return lehrer;
     }
 
-    public void setLehrer_ID(Lehrer lehrer_ID) {
-        this.lehrer_ID = lehrer_ID;
+    public void setLehrer(Lehrer lehrer) {
+        this.lehrer = lehrer;
     }
 
-    public Studenten getStudent_ID() {
-        return student_ID;
+    public Studenten getStudent() {
+        return student;
     }
 
-    public void setStudent_ID(Studenten student_ID) {
-        this.student_ID = student_ID;
+    public void setStudent(Studenten student) {
+        this.student = student;
     }
 
-    public Nutzerrechte getNutzerrecht_ID() {
-        return nutzerrecht_ID;
+    public Nutzerrechte getNutzerrecht() {
+        return nutzerrecht;
     }
 
-    public void setNutzerrecht_ID(Nutzerrechte nutzerrecht_ID) {
-        this.nutzerrecht_ID = nutzerrecht_ID;
+    public void setNutzerrecht(Nutzerrechte nutzerrecht) {
+        this.nutzerrecht = nutzerrecht;
     }
 
 }

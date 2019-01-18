@@ -33,13 +33,10 @@ public class Lehrer {
     private Date Geburtsdatum;
 
     @OneToOne
-    private LogIns logIn_ID;
+    private LogIns logIn;
 
     @ManyToMany
-    private List<Kurse> kurse_ids;
-
-    @ManyToMany
-    private List<Gruppen> gruppen_ids;
+    private List<KurseZuGruppen> kursZuGruppe;
 
     public Long getId() {
         return id;
@@ -73,54 +70,31 @@ public class Lehrer {
         this.Geburtsdatum = Geburtsdatum;
     }
 
-    public LogIns getLogIn_ID() {
-        return logIn_ID;
+    public LogIns getLogIn() {
+        return logIn;
     }
 
-    public void setLogIn_ID(LogIns logIn_ID) {
-        this.logIn_ID = logIn_ID;
+    public void setLogIn(LogIns logIn) {
+        this.logIn = logIn;
     }
 
-    public List<Kurse> getKurse_ids() {
-        if (kurse_ids == null) {
-            kurse_ids = new ArrayList<>();
+    public List<KurseZuGruppen> getKursZuGruppe() {
+        if (kursZuGruppe == null) {
+            kursZuGruppe = new ArrayList<>();
         }
-        return kurse_ids;
+        return kursZuGruppe;
     }
 
-    public void setKurse_ids(List<Kurse> kurse_ids) {
-        this.kurse_ids = kurse_ids;
+    public void setKursZuGruppe(List<KurseZuGruppen> kursZuGruppe) {
+        this.kursZuGruppe = kursZuGruppe;
     }
 
-    public void addKurse_id(Kurse kurse_id) {
-        getKurse_ids().add(kurse_id);
-        kurse_id.getLehrer_ids().add(this);
+    public void addKursZuGruppe(KurseZuGruppen kursZuGruppe) {
+        getKursZuGruppe().add(kursZuGruppe);
     }
 
-    public void removeKurse_id(Kurse kurse_id) {
-        getKurse_ids().remove(kurse_id);
-        kurse_id.getLehrer_ids().remove(this);
-    }
-
-    public List<Gruppen> getGruppen_ids() {
-        if (gruppen_ids == null) {
-            gruppen_ids = new ArrayList<>();
-        }
-        return gruppen_ids;
-    }
-
-    public void setGruppen_ids(List<Gruppen> gruppen_ids) {
-        this.gruppen_ids = gruppen_ids;
-    }
-
-    public void addGruppen_id(Gruppen gruppen_id) {
-        getGruppen_ids().add(gruppen_id);
-        gruppen_id.getLehrer_ids().add(this);
-    }
-
-    public void removeGruppen_id(Gruppen gruppen_id) {
-        getGruppen_ids().remove(gruppen_id);
-        gruppen_id.getLehrer_ids().remove(this);
+    public void removeKursZuGruppe(KurseZuGruppen kursZuGruppe) {
+        getKursZuGruppe().remove(kursZuGruppe);
     }
 
 }

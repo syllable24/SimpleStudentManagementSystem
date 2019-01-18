@@ -23,7 +23,7 @@ public class Nutzerrechte {
     private String Schreiben;
 
     @OneToOne
-    private LogIns logIn_ID;
+    private LogIns logIn;
 
     public Long getId() {
         return id;
@@ -49,12 +49,12 @@ public class Nutzerrechte {
         this.Schreiben = Schreiben;
     }
 
-    public LogIns getLogIn_ID() {
-        return logIn_ID;
+    public LogIns getLogIn() {
+        return logIn;
     }
 
-    public void setLogIn_ID(LogIns logIn_ID) {
-        this.logIn_ID = logIn_ID;
+    public void setLogIn(LogIns logIn) {
+        this.logIn = logIn;
     }
 
 }

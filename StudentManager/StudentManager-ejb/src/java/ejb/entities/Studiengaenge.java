@@ -22,7 +22,7 @@ public class Studiengaenge {
     private String Bezeichnung;
 
     @OneToMany(mappedBy = "studiengaenge")
-    private List<Studenten> studenten_ids;
+    private List<Studenten> student;
 
     public Long getId() {
         return id;
@@ -40,25 +40,25 @@ public class Studiengaenge {
         this.Bezeichnung = Bezeichnung;
     }
 
-    public List<Studenten> getStudenten_ids() {
-        if (studenten_ids == null) {
-            studenten_ids = new ArrayList<>();
+    public List<Studenten> getStudent() {
+        if (student == null) {
+            student = new ArrayList<>();
         }
-        return studenten_ids;
+        return student;
     }
 
-    public void setStudenten_ids(List<Studenten> studenten_ids) {
-        this.studenten_ids = studenten_ids;
+    public void setStudent(List<Studenten> student) {
+        this.student = student;
     }
 
-    public void addStudenten_id(Studenten studenten_id) {
-        getStudenten_ids().add(studenten_id);
-        studenten_id.setStudiengaenge(this);
+    public void addStudent(Studenten student) {
+        getStudent().add(student);
+        student.setStudiengaenge(this);
     }
 
-    public void removeStudenten_id(Studenten studenten_id) {
-        getStudenten_ids().remove(studenten_id);
-        studenten_id.setStudiengaenge(null);
+    public void removeStudent(Studenten student) {
+        getStudent().remove(student);
+        student.setStudiengaenge(null);
     }
 
 }

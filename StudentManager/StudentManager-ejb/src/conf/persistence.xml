@@ -11,6 +11,8 @@
     <class>ejb.entities.Studenten</class>
     <class>ejb.entities.Studiengaenge</class>
     <class>ejb.entities.Kurse</class>
+    <class>ejb.entities.Omni</class>
+    <class>ejb.entities.KurseZuGruppen</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="hibernate.hbm2ddl.auto" value="create-drop"/>

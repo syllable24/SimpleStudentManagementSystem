@@ -6,7 +6,7 @@ import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 /**
  * @author ralph
@@ -21,11 +21,8 @@ public class Kurse {
     @Basic
     private String Bezeichnung;
 
-    @ManyToMany(mappedBy = "kurse_ids")
-    private List<Studenten> studenten_ids;
-
-    @ManyToMany(mappedBy = "kurse_ids")
-    private List<Lehrer> lehrer_ids;
+    @OneToMany(mappedBy = "kurs")
+    private List<KurseZuGruppen> kursZuGruppe;
 
     public Long getId() {
         return id;
@@ -43,42 +40,25 @@ public class Kurse {
         this.Bezeichnung = Bezeichnung;
     }
 
-    public List<Studenten> getStudenten_ids() {
-        if (studenten_ids == null) {
-            studenten_ids = new ArrayList<>();
+    public List<KurseZuGruppen> getKursZuGruppe() {
+        if (kursZuGruppe == null) {
+            kursZuGruppe = new ArrayList<>();
         }
-        return studenten_ids;
+        return kursZuGruppe;
     }
 
-    public void setStudenten_ids(List<Studenten> studenten_ids) {
-        this.studenten_ids = studenten_ids;
+    public void setKursZuGruppe(List<KurseZuGruppen> kursZuGruppe) {
+        this.kursZuGruppe = kursZuGruppe;
     }
 
-    public void addStudenten_id(Studenten studenten_id) {
-        getStudenten_ids().add(studenten_id);
+    public void addKursZuGruppe(KurseZuGruppen kursZuGruppe) {
+        getKursZuGruppe().add(kursZuGruppe);
+        kursZuGruppe.setKurs(this);
     }
 
-    public void removeStudenten_id(Studenten studenten_id) {
-        getStudenten_ids().remove(studenten_id);
-    }
-
-    public List<Lehrer> getLehrer_ids() {
-        if (lehrer_ids == null) {
-            lehrer_ids = new ArrayList<>();
-        }
-        return lehrer_ids;
-    }
-
-    public void setLehrer_ids(List<Lehrer> lehrer_ids) {
-        this.lehrer_ids = lehrer_ids;
-    }
-
-    public void addLehrer_id(Lehrer lehrer_id) {
-        getLehrer_ids().add(lehrer_id);
-    }
-
-    public void removeLehrer_id(Lehrer lehrer_id) {
-        getLehrer_ids().remove(lehrer_id);
+    public void removeKursZuGruppe(KurseZuGruppen kursZuGruppe) {
+        getKursZuGruppe().remove(kursZuGruppe);
+        kursZuGruppe.setKurs(null);
     }
 
 }

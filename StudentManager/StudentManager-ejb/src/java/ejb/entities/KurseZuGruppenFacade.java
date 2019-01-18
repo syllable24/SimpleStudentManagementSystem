@@ -14,7 +14,7 @@ import javax.persistence.PersistenceContext;
  * @author ralph
  */
 @Stateless
-public class KurseFacade extends AbstractFacade<Kurse> {
+public class KurseZuGruppenFacade extends AbstractFacade<KurseZuGruppen> {
 
     @PersistenceContext(unitName = "StudentManager-ejbPU")
     private EntityManager em;
@@ -23,9 +23,9 @@ public class KurseFacade extends AbstractFacade<Kurse> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
-    public KurseFacade() {
-        super(Kurse.class);        
+
+    public KurseZuGruppenFacade() {
+        super(KurseZuGruppen.class);
     }
     
 }
