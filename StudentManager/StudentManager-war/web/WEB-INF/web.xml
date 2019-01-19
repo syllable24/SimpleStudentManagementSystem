@@ -10,7 +10,7 @@
     </servlet>
     <servlet>
         <servlet-name>StudentenServlet</servlet-name>
-        <servlet-class>web.StudentenServlet</servlet-class>
+        <servlet-class>web.StudentServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LehrerServlet</servlet-name>

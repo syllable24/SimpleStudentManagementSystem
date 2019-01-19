@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ralph
  */
+@WebServlet(name="LogIn", urlPatterns = {"/LogIn"})
 public class LogIn extends HttpServlet {
 
     @EJB
@@ -40,30 +42,30 @@ public class LogIn extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {        
+            throws ServletException, IOException {
         
         boolean bNoUserFound = false;
         
         request.getSession(true);
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {            
+        try (PrintWriter out = response.getWriter()) {
             
             String userName = request.getParameter("UserName");
             String userPassword = request.getParameter("UserPassword");
             
-            if((userName != null)&&(userPassword != null)){                
+            if((userName != null)&&(userPassword != null)){
                
-                LogIns login = new LogIns();                
+                LogIns login = new LogIns();
                 login.setUsernameMD5(userName);
                 login.setPasswortMD5(userPassword);
 
-                Object result = logInLookup.determineUserType(login);           
+                Object result = logInLookup.determineUserType(login);
                 
                 if(result instanceof Studenten){
-                    response.sendRedirect("/StudentServlet");                    
+                    response.sendRedirect("StudentServlet");
                 } 
                 else if(result instanceof Lehrer){
-                    response.sendRedirect("/LehrerServlet");
+                    response.sendRedirect("LehrerServlet");
                 }
                 else{
                     bNoUserFound = true;
@@ -73,7 +75,7 @@ public class LogIn extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LogIn</title>");            
+            out.println("<title>Servlet LogIn</title>");
             out.println("</head>");
             out.println("<body>");
             
@@ -93,7 +95,7 @@ public class LogIn extends HttpServlet {
                 out.println("<p style = 'border:3px; border-style:solid; border-color:#FF0000; padding:1em;'> "
                         + "Log In Daten nicht gefunden! </p>");
             }
-                        
+            
             out.println("</body>");
             out.println("</html>");
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
