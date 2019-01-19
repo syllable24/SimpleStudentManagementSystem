@@ -5,11 +5,7 @@
  */
 package ejb.message;
 
-import ejb.entities.Studenten;
 import ejb.entities.Studiengaenge;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
@@ -20,7 +16,6 @@ import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.ObjectMessage;
-import javax.jms.TextMessage;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -37,8 +32,7 @@ public class TestMessageBean implements MessageListener {
     @Resource
     private MessageDrivenContext mdc;    
     @PersistenceContext(unitName = "StudentManager-ejbPU")
-    private EntityManager em;
-    
+    private EntityManager em;    
     
     public TestMessageBean() {
     }
