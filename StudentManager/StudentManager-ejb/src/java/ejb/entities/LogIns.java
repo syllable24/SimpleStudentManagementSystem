@@ -1,11 +1,16 @@
 package ejb.entities;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.xml.bind.DatatypeConverter;
 
 /**
  * @author ralph
@@ -44,16 +49,24 @@ public class LogIns implements Serializable {
         return UsernameMD5;
     }
 
-    public void setUsernameMD5(String UsernameMD5) {
-        this.UsernameMD5 = UsernameMD5;
+    public void setUsernameMD5(String Username) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(Username.getBytes("UTF-8"));        
+        byte[] dig = md.digest();
+        String result = DatatypeConverter.printHexBinary(dig);                
+        this.UsernameMD5 = result;
     }
 
-    public String getPasswortMD5() {
+    public String getPasswortMD5() {        
         return PasswortMD5;
     }
 
-    public void setPasswortMD5(String PasswortMD5) {
-        this.PasswortMD5 = PasswortMD5;
+    public void setPasswortMD5(String Passwort) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(Passwort.getBytes("UTF-8")); 
+        byte[] dig = md.digest();
+        String result = DatatypeConverter.printHexBinary(dig);        
+        this.PasswortMD5 = result;
     }
 
     public Lehrer getLehrer() {
@@ -79,5 +92,5 @@ public class LogIns implements Serializable {
     public void setNutzerrecht(Nutzerrechte nutzerrecht) {
         this.nutzerrecht = nutzerrecht;
     }
-
+    
 }
