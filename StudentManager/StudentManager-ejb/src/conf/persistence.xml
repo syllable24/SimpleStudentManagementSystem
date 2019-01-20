@@ -8,14 +8,23 @@
     <class>ejb.entities.Lehrer</class>
     <class>ejb.entities.Gruppen</class>
     <class>ejb.entities.Studiengaenge</class>
-    <class>ejb.entities.LogIns</class>
     <class>ejb.entities.Nutzerrechte</class>
     <class>ejb.entities.KurseZuGruppen</class>
+    <class>ejb.entitiesV2.Studenten</class>
+    <class>ejb.entitiesV2.Kurse</class>
+    <class>ejb.entitiesV2.Lehrer</class>
+    <class>ejb.entitiesV2.Gruppen</class>
+    <class>ejb.entitiesV2.Studiengaenge</class>
+    <class>ejb.entitiesV2.LogIns</class>
+    <class>ejb.entitiesV2.Nutzerrechte</class>
+    <class>ejb.entitiesV2.Admin</class>
+    <class>ejb.entities.LogIns</class>
+    <class>ejb.entities.Admin</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-        <property name="hibernate.hbm2ddl.auto" value="update"/>
-        <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
-        <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.SunOneJtaPlatform" />
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
+      <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.SunOneJtaPlatform"/>
     </properties>
   </persistence-unit>
 </persistence>

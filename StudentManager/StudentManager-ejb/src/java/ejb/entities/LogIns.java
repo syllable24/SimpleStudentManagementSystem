@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,6 +36,9 @@ public class LogIns implements Serializable {
     @OneToOne(mappedBy = "logIn")
     private Nutzerrechte nutzerrecht;
 
+    @OneToOne(mappedBy = "logIn")
+    private Admin admin;
+
     public Long getId() {
         return id;
     }
@@ -57,7 +59,7 @@ public class LogIns implements Serializable {
         this.UsernameMD5 = result;
     }
 
-    public String getPasswortMD5() {        
+    public String getPasswortMD5() {
         return PasswortMD5;
     }
 
@@ -92,5 +94,13 @@ public class LogIns implements Serializable {
     public void setNutzerrecht(Nutzerrechte nutzerrecht) {
         this.nutzerrecht = nutzerrecht;
     }
-    
+
+    public Admin getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
+
 }

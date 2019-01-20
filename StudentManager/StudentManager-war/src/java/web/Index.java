@@ -91,7 +91,7 @@ public class Index extends HttpServlet {
             out.println("<table border = '1'>");
             out.println("<td>Vorname</td>");
             out.println("<td>Nachname</td>");                 
-                                    
+
             List list = studentenFacade.findAll();
             for(Iterator it = list.iterator(); it.hasNext();){
                 out.println("<tr>");

@@ -5,6 +5,7 @@
  */
 package web;
 
+import ejb.SessionManager;
 import ejb.entities.Lehrer;
 import ejb.entities.LogIns;
 import ejb.entities.LogInsFacade;
@@ -31,6 +32,7 @@ public class LogIn extends HttpServlet {
 
     @EJB
     private LogInsFacade logInLookup;
+
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -53,7 +55,7 @@ public class LogIn extends HttpServlet {
             String userName = request.getParameter("UserName");
             String userPassword = request.getParameter("UserPassword");
             
-            if((userName != null)&&(userPassword != null)){
+            if((userName != null) && (userPassword != null)){
                
                 LogIns login = new LogIns();
                 login.setUsernameMD5(userName);
@@ -62,9 +64,17 @@ public class LogIn extends HttpServlet {
                 Object result = logInLookup.determineUserType(login);
                 
                 if(result instanceof Studenten){
+                    request.getSession().setAttribute("UserID", ((Studenten) result).getId());
+                    getServletConfig().getServletContext()
+                                      .getRequestDispatcher("/StudentServlet")
+                                      .forward(request, response);
+                    
+                    //request.getRequestDispatcher("StudentServlet").forward(request, response);
                     response.sendRedirect("StudentServlet");
                 } 
                 else if(result instanceof Lehrer){
+                    request.getSession().setAttribute("User", result);
+                    request.getRequestDispatcher("LehrerServlet").forward(request, response);
                     response.sendRedirect("LehrerServlet");
                 }
                 else{

@@ -5,13 +5,20 @@
  */
 package web;
 
+import ejb.entities.Kurse;
+import ejb.entities.Studenten;
+import ejb.entities.StudentenFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 
 /**
  *
@@ -20,6 +27,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name="StudentServlet", urlPatterns = {"/StudentServlet"}) 
 public class StudentServlet extends HttpServlet {
 
+    @EJB
+    private StudentenFacade studentenFacade;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,14 +43,33 @@ public class StudentServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+           
+            request.getSession(true);
+            long userID = (long) request.getSession().getAttribute("UserID");  
+            List<Kurse> kursListe = studentenFacade.getKurse(userID);           
+            
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet StudentenServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet StudentenServlet at " + request.getContextPath() + "</h1>");
+            
+            out.println("<b>I'm still here</b>");
+            
+            out.println("<table border = '1'>");
+            out.println("<td>Kurs</td>");
+            out.println("<td>Note</td>");                 
+
+            for (Kurse kurs : kursListe) {
+                out.println("<tr>");                
+                out.println("<td>" + kurs.getBezeichnung() + "</td>");
+                out.println("<td>" + kurs.getNote() + "</td>");
+                out.println("</tr>");
+            }
+            out.println("</table>");   
+            
+            
             out.println("</body>");
             out.println("</html>");
         }

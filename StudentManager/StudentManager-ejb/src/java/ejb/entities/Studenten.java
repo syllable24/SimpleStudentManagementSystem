@@ -4,14 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -42,8 +41,11 @@ public class Studenten implements Serializable {
     @ManyToOne
     private Studiengaenge studiengaenge;
 
-    @ManyToMany
-    private List<KurseZuGruppen> kursZuGruppe;
+    @OneToMany(mappedBy = "student")
+    private List<Gruppen> gruppe;
+
+    @ManyToMany(mappedBy = "studentens")
+    private List<Kurse> kurses;
 
     public Long getId() {
         return id;
@@ -93,23 +95,44 @@ public class Studenten implements Serializable {
         this.studiengaenge = studiengaenge;
     }
 
-    public List<KurseZuGruppen> getKursZuGruppe() {
-        if (kursZuGruppe == null) {
-            kursZuGruppe = new ArrayList<>();
+    public List<Gruppen> getGruppe() {
+        if (gruppe == null) {
+            gruppe = new ArrayList<>();
         }
-        return kursZuGruppe;
+        return gruppe;
     }
 
-    public void setKursZuGruppe(List<KurseZuGruppen> kursZuGruppe) {
-        this.kursZuGruppe = kursZuGruppe;
+    public void setGruppe(List<Gruppen> gruppe) {
+        this.gruppe = gruppe;
     }
 
-    public void addKursZuGruppe(KurseZuGruppen kursZuGruppe) {
-        getKursZuGruppe().add(kursZuGruppe);
+    public void addGruppe(Gruppen gruppe) {
+        getGruppe().add(gruppe);
+        gruppe.setStudent(this);
     }
 
-    public void removeKursZuGruppe(KurseZuGruppen kursZuGruppe) {
-        getKursZuGruppe().remove(kursZuGruppe);
+    public void removeGruppe(Gruppen gruppe) {
+        getGruppe().remove(gruppe);
+        gruppe.setStudent(null);
+    }
+
+    public List<Kurse> getKurses() {
+        if (kurses == null) {
+            kurses = new ArrayList<>();
+        }
+        return kurses;
+    }
+
+    public void setKurses(List<Kurse> kurses) {
+        this.kurses = kurses;
+    }
+
+    public void addKurse(Kurse kurse) {
+        getKurses().add(kurse);
+    }
+
+    public void removeKurse(Kurse kurse) {
+        getKurses().remove(kurse);
     }
 
 }

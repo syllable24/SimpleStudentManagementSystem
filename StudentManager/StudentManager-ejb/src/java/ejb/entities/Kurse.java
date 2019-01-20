@@ -7,7 +7,8 @@ import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 /**
  * @author ralph
@@ -22,8 +23,14 @@ public class Kurse implements Serializable {
     @Basic
     private String Bezeichnung;
 
-    @OneToMany(mappedBy = "kurs")
-    private List<KurseZuGruppen> kursZuGruppe;
+    @Basic
+    private int Note = 0;
+
+    @ManyToOne
+    private Lehrer lehrer;
+
+    @ManyToMany
+    private List<Studenten> studentens;
 
     public Long getId() {
         return id;
@@ -41,25 +48,41 @@ public class Kurse implements Serializable {
         this.Bezeichnung = Bezeichnung;
     }
 
-    public List<KurseZuGruppen> getKursZuGruppe() {
-        if (kursZuGruppe == null) {
-            kursZuGruppe = new ArrayList<>();
+    public int getNote() {
+        return Note;
+    }
+
+    public void setNote(int Note) {
+        this.Note = Note;
+    }
+
+    public Lehrer getLehrer() {
+        return lehrer;
+    }
+
+    public void setLehrer(Lehrer lehrer) {
+        this.lehrer = lehrer;
+    }
+
+    public List<Studenten> getStudentens() {
+        if (studentens == null) {
+            studentens = new ArrayList<>();
         }
-        return kursZuGruppe;
+        return studentens;
     }
 
-    public void setKursZuGruppe(List<KurseZuGruppen> kursZuGruppe) {
-        this.kursZuGruppe = kursZuGruppe;
+    public void setStudentens(List<Studenten> studentens) {
+        this.studentens = studentens;
     }
 
-    public void addKursZuGruppe(KurseZuGruppen kursZuGruppe) {
-        getKursZuGruppe().add(kursZuGruppe);
-        kursZuGruppe.setKurs(this);
+    public void addStudenten(Studenten studenten) {
+        getStudentens().add(studenten);
+        studenten.getKurses().add(this);
     }
 
-    public void removeKursZuGruppe(KurseZuGruppen kursZuGruppe) {
-        getKursZuGruppe().remove(kursZuGruppe);
-        kursZuGruppe.setKurs(null);
+    public void removeStudenten(Studenten studenten) {
+        getStudentens().remove(studenten);
+        studenten.getKurses().remove(this);
     }
 
 }

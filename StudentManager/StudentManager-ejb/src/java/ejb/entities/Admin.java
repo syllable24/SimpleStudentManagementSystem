@@ -1,14 +1,11 @@
 package ejb.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -17,7 +14,7 @@ import javax.persistence.TemporalType;
  * @author ralph
  */
 @Entity
-public class Lehrer implements Serializable {
+public class Admin implements Serializable {
 
     @Id
     @GeneratedValue
@@ -35,9 +32,6 @@ public class Lehrer implements Serializable {
 
     @OneToOne
     private LogIns logIn;
-
-    @OneToMany(mappedBy = "lehrer")
-    private List<Kurse> kurs;
 
     public Long getId() {
         return id;
@@ -77,27 +71,6 @@ public class Lehrer implements Serializable {
 
     public void setLogIn(LogIns logIn) {
         this.logIn = logIn;
-    }
-
-    public List<Kurse> getKurs() {
-        if (kurs == null) {
-            kurs = new ArrayList<>();
-        }
-        return kurs;
-    }
-
-    public void setKurs(List<Kurse> kurs) {
-        this.kurs = kurs;
-    }
-
-    public void addKur(Kurse kur) {
-        getKurs().add(kur);
-        kur.setLehrer(this);
-    }
-
-    public void removeKur(Kurse kur) {
-        getKurs().remove(kur);
-        kur.setLehrer(null);
     }
 
 }
