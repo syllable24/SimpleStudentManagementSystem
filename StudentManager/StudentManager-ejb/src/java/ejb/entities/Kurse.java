@@ -7,8 +7,8 @@ import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * @author ralph
@@ -23,14 +23,11 @@ public class Kurse implements Serializable {
     @Basic
     private String Bezeichnung;
 
-    @Basic
-    private int Note = 0;
-
     @ManyToOne
     private Lehrer lehrer;
 
-    @ManyToMany
-    private List<Studenten> studentens;
+    @OneToMany(mappedBy = "kurse")
+    private List<Kursnoten> kursnoten;
 
     public Long getId() {
         return id;
@@ -48,14 +45,6 @@ public class Kurse implements Serializable {
         this.Bezeichnung = Bezeichnung;
     }
 
-    public int getNote() {
-        return Note;
-    }
-
-    public void setNote(int Note) {
-        this.Note = Note;
-    }
-
     public Lehrer getLehrer() {
         return lehrer;
     }
@@ -64,25 +53,25 @@ public class Kurse implements Serializable {
         this.lehrer = lehrer;
     }
 
-    public List<Studenten> getStudentens() {
-        if (studentens == null) {
-            studentens = new ArrayList<>();
+    public List<Kursnoten> getKursnoten() {
+        if (kursnoten == null) {
+            kursnoten = new ArrayList<>();
         }
-        return studentens;
+        return kursnoten;
     }
 
-    public void setStudentens(List<Studenten> studentens) {
-        this.studentens = studentens;
+    public void setKursnoten(List<Kursnoten> kursnoten) {
+        this.kursnoten = kursnoten;
     }
 
-    public void addStudenten(Studenten studenten) {
-        getStudentens().add(studenten);
-        studenten.getKurses().add(this);
+    public void addKursnoten(Kursnoten kursnoten) {
+        getKursnoten().add(kursnoten);
+        kursnoten.setKurse(this);
     }
 
-    public void removeStudenten(Studenten studenten) {
-        getStudentens().remove(studenten);
-        studenten.getKurses().remove(this);
+    public void removeKursnoten(Kursnoten kursnoten) {
+        getKursnoten().remove(kursnoten);
+        kursnoten.setKurse(null);
     }
 
 }

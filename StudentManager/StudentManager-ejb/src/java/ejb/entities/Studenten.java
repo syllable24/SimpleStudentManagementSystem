@@ -8,8 +8,8 @@ import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -43,8 +43,8 @@ public class Studenten implements Serializable {
     @ManyToOne
     private Gruppen gruppe;
 
-    @ManyToMany(mappedBy = "studentens")
-    private List<Kurse> kurses;
+    @OneToMany(mappedBy = "student")
+    private List<Kursnoten> kursnoten;
 
     public Long getId() {
         return id;
@@ -102,23 +102,25 @@ public class Studenten implements Serializable {
         this.gruppe = gruppe;
     }
 
-    public List<Kurse> getKurses() {
-        if (kurses == null) {
-            kurses = new ArrayList<>();
+    public List<Kursnoten> getKursnoten() {
+        if (kursnoten == null) {
+            kursnoten = new ArrayList<>();
         }
-        return kurses;
+        return kursnoten;
     }
 
-    public void setKurses(List<Kurse> kurses) {
-        this.kurses = kurses;
+    public void setKursnoten(List<Kursnoten> kursnoten) {
+        this.kursnoten = kursnoten;
     }
 
-    public void addKurse(Kurse kurse) {
-        getKurses().add(kurse);
+    public void addKursnoten(Kursnoten kursnoten) {
+        getKursnoten().add(kursnoten);
+        kursnoten.setStudent(this);
     }
 
-    public void removeKurse(Kurse kurse) {
-        getKurses().remove(kurse);
+    public void removeKursnoten(Kursnoten kursnoten) {
+        getKursnoten().remove(kursnoten);
+        kursnoten.setStudent(null);
     }
 
 }

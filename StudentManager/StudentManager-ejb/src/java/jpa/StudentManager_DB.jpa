@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" ptype="MONOLITH" ppkg="ejb" epkg="entities" v="5.2" rws="_15475902159428" Pws="_15475902159428" cws="_15475902159428" persistenceUnitName="StudentManager-ejbPU" pp="H" sm="false" xs="false" id="_15475902159427" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
+<jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" ptype="MONOLITH" ppkg="ejb" epkg="entities_2" v="5.2" rws="_15475902159428" Pws="_15475902159428" cws="_15475902159428" persistenceUnitName="StudentManager-ejbPU" pp="H" sm="false" xs="false" id="_15475902159427" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
     <jpa:entity compositePrimaryKeyClass="StudentenPK" abs="false" class="Studenten" v="true" jbn="false" xre="false" m="false" rootElement="_15475902159427" id="_1547632413676493">
         <jpa:ath>ralph</jpa:ath>
         <jpa:attributes>
@@ -24,14 +24,14 @@
                 <jpa:xwm/>
                 <jpa:xm/>
             </jpa:many-to-one>
+            <jpa:one-to-many orp="false" collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_1548252256359285" connected-attribute-id="_1548252285411292" v="true" xvt="" name="kursnoten" id="_1548252285413293">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:one-to-many>
             <jpa:one-to-one own="true" orp="false" optional="true" primaryKey="false" connected-entity-id="_1547633023820532" connected-attribute-id="_1547633080604542" v="true" xvt="" name="logIn" id="_1547633080603541">
                 <jpa:xwm/>
                 <jpa:xm/>
             </jpa:one-to-one>
-            <jpa:many-to-many collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_1547632456171499" connected-attribute-id="_1547900060064145" v="true" xvt="" name="kurses" id="_1547900060071146">
-                <jpa:xwm/>
-                <jpa:xm/>
-            </jpa:many-to-many>
             <jpa:id attribute-type="Long" v="true" xvt="" name="id" id="_1547632413678494">
                 <jpa:xwm/>
                 <jpa:xm/>
@@ -53,12 +53,11 @@
     </jpa:entity>
     <jpa:entity compositePrimaryKeyClass="KursePK" abs="false" class="Kurse" v="true" jbn="false" xre="false" m="false" rootElement="_15475902159427" id="_1547632456171499">
         <jpa:ath>ralph</jpa:ath>
+        <jpa:removedAttributes>
+            <jpa:i>Note</jpa:i>
+        </jpa:removedAttributes>
         <jpa:attributes>
             <jpa:basic attribute-type="String" v="true" xvt="" name="Bezeichnung" id="_1547632469730502">
-                <jpa:xwm/>
-                <jpa:xm/>
-            </jpa:basic>
-            <jpa:basic attribute-type="int" v="true" xvt="" name="Note" dv="0" id="_1547899980744137">
                 <jpa:xwm/>
                 <jpa:xm/>
             </jpa:basic>
@@ -66,10 +65,10 @@
                 <jpa:xwm/>
                 <jpa:xm/>
             </jpa:many-to-one>
-            <jpa:many-to-many own="true" collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_1547632413676493" connected-attribute-id="_1547900060071146" v="true" xvt="" name="studentens" id="_1547900060064145">
+            <jpa:one-to-many orp="false" collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_1548252256359285" connected-attribute-id="_1548252273691289" v="true" xvt="" name="kursnoten" id="_1548252273693290">
                 <jpa:xwm/>
                 <jpa:xm/>
-            </jpa:many-to-many>
+            </jpa:one-to-many>
             <jpa:id attribute-type="Long" v="true" xvt="" name="id" id="_1547632456171500">
                 <jpa:xwm/>
                 <jpa:xm/>
@@ -290,6 +289,34 @@
             <jpa:query>Select a from Admin a where a.Geburtsdatum=:Geburtsdatum</jpa:query>
         </jpa:nq>
     </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="KursnotenPK" abs="false" class="Kursnoten" v="true" jbn="false" xre="false" m="false" rootElement="_15475902159427" id="_1548252256359285">
+        <jpa:ath>ralph</jpa:ath>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="Note" id="_1548252293827294">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:basic>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_1547632456171499" connected-attribute-id="_1548252273693290" v="true" xvt="" name="kurse" id="_1548252273691289">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:many-to-one>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_1547632413676493" connected-attribute-id="_1548252285413293" v="true" xvt="" name="student" id="_1548252285411292">
+                <jpa:xwm/>
+                <jpa:xm/>
+            </jpa:many-to-one>
+            <jpa:id attribute-type="Long" v="true" xvt="" name="id" id="_1548252256369286">
+                <jpa:xwm/>
+                <jpa:xm/>
+                <jpa:generated-value strategy="DEFAULT"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Kursnoten.findAll">
+            <jpa:query>Select e from Kursnoten e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Kursnoten.findByNote">
+            <jpa:query>Select k from Kursnoten k where k.Note=:Note</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
     <jpa:c>
         <ct>java.util.List</ct>
         <ct>java.util.Set</ct>
@@ -307,7 +334,8 @@
             <i ref="_1547632903930525" x="773" y="37"/>
             <i ref="_1547633023820532" x="729" y="294"/>
             <i ref="_1547899894957125" x="998" y="553"/>
-            <i ref="_1547632456171499" x="185" y="246"/>
+            <i ref="_1548252256359285" x="235" y="230"/>
+            <i ref="_1547632456171499" x="36" y="277"/>
             <i ref="_1547632498066506" x="460" y="345"/>
             <i ref="_1547633105710543" x="998" y="230"/>
             <i ref="_1547632413676493" x="446" y="32"/>

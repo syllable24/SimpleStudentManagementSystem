@@ -5,19 +5,16 @@
  */
 package ejb.entities;
 
-import ejb.entities.Studenten;
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 /**
  *
  * @author ralph
  */
 @Stateless
-public class StudentenFacade extends AbstractFacade<Studenten> {
+public class KursnotenFacade extends AbstractFacade<Kursnoten> {
 
     @PersistenceContext(unitName = "StudentManager-ejbPU")
     private EntityManager em;
@@ -27,15 +24,8 @@ public class StudentenFacade extends AbstractFacade<Studenten> {
         return em;
     }
 
-    public StudentenFacade() {
-        super(Studenten.class);
+    public KursnotenFacade() {
+        super(Kursnoten.class);
     }
     
-    public List<Studenten> getStudentByName(String name){
-        List<Studenten> result = null;
-        
-        Query q = em.createQuery("SELECT s FROM Studenten s WHERE s.Nachname = '" + name + "'");
-        result = (List<Studenten>) q.getResultList();        
-        return result;
-    }    
 }

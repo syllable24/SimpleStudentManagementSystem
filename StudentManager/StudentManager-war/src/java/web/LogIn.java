@@ -65,25 +65,17 @@ public class LogIn extends HttpServlet {
                 login.setUsernameMD5(userName);
                 login.setPasswortMD5(userPassword);
 
-                Object result = logInLookup.determineUserType(login);                
+                Object result = logInLookup.determineUserType(login);
                 
                 if(result instanceof Studenten){
-                    userData.setCurrentUserID(((Studenten) result).getId());
+                    userData.setCurrentStudent(((Studenten) result));
                     session.setAttribute("UserID", userData);
-                    //request.getSession().setAttribute("UserID", ((Studenten) result).getId());
-//                    getServletConfig().getServletContext()
-//                                      .getRequestDispatcher("/StudentServlet")
-//                                      .forward(request, response); 
                     response.sendRedirect("StudentServlet");
                 }
                 else if(result instanceof Lehrer){
-                    userData.setCurrentUserID(((Lehrer) result).getId());
+                    userData.setCurrentLehrer(((Lehrer) result));
                     session.setAttribute("UserID", userData);
-                    //request.getSession().setAttribute("UserID", ((Lehrer) result).getId());
-//                    getServletConfig().getServletContext()
-//                                      .getRequestDispatcher("/LehrerServlet")
-//                                      .forward(request, response);
-                    response.sendRedirect("LehrerServlet");
+                    response.sendRedirect("LehrerMenu");
                 }
                 else{
                     bNoUserFound = true;

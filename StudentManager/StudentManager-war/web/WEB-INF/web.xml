@@ -16,6 +16,30 @@
         <servlet-name>LehrerServlet</servlet-name>
         <servlet-class>web.LehrerServlet</servlet-class>
     </servlet>
+    
+    <servlet>
+        <servlet-name>LehrerMenu</servlet-name>
+        <servlet-class>web.LehrerMenu</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LehrerSearchStudentServlet</servlet-name>
+        <servlet-class>web.LehrerSearchStudentServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LehrerSearchKursServlet</servlet-name>
+        <servlet-class>web.LehrerSearchKursServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LehrerKursnoteEintragenServlet</servlet-name>
+        <servlet-class>web.LehrerKursnoteEintragenServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LehrerStudentEinschreibenServlet</servlet-name>
+        <servlet-class>web.LehrerStudentEinschreibenServlet</servlet-class>
+    </servlet><servlet>
+        <servlet-name>LehrerStudentEinschreibenServlet</servlet-name>
+        <servlet-class>web.LehrerStudentEinschreibenServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LogIn</servlet-name>
         <url-pattern>/LogIn</url-pattern>
@@ -32,9 +56,24 @@
         <servlet-name>LehrerServlet</servlet-name>
         <url-pattern>/LehrerServlet</url-pattern>
     </servlet-mapping>
-    <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
-    </session-config>
-</web-app>
+    
+    <servlet-mapping>
+        <servlet-name>LehrerSearchStudentServlet</servlet-name>
+        <url-pattern>/LehrerSearchStudentServlet</url-pattern>
+    </servlet-mapping><servlet-mapping>
+        <servlet-name>LehrerSearchStudentServlet</servlet-name>
+        <url-pattern>/LehrerSearchStudentServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LehrerSearchKursServlet</servlet-name>
+        <url-pattern>/LehrerSearchKursServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LehrerKursnoteEintragenServlet</servlet-name>
+        <url-pattern>/LehrerKursnoteEintragenServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LehrerStudentEinschreibenServlet</servlet-name>
+        <url-pattern>/LehrerStudentEinschreibenServlet</url-pattern>
+    </servlet-mapping>
+    </web-app>

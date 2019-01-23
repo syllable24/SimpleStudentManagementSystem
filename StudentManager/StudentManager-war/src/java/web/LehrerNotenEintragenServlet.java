@@ -8,6 +8,7 @@ package web;
 import ejb.UserData;
 import ejb.entities.Kurse;
 import ejb.entities.KurseFacade;
+import ejb.entities.Kursnoten;
 import ejb.entities.Lehrer;
 import ejb.entities.LehrerFacade;
 import ejb.entities.Studenten;
@@ -26,8 +27,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ralph
  */
-@WebServlet(name="LehrerServlet", urlPatterns = {"/LehrerServlet"})
-public class LehrerServlet extends HttpServlet {
+@WebServlet(name="LehrerNotenEintragenServlet", urlPatterns = {"/LehrerNotenEintragenServlet"})
+public class LehrerNotenEintragenServlet extends HttpServlet {
 
     @EJB 
     private LehrerFacade lehrerF;
@@ -56,7 +57,7 @@ public class LehrerServlet extends HttpServlet {
         //long userID = sblb.getCurrentUserID();
         UserData userData = (UserData) request.getSession().getAttribute("UserID");  
         long userID = userData.getCurrentUserID();        
-        Lehrer lehr = lehrerF.find(userID);        
+        Lehrer lehr = lehrerF.find(userID);
         
         List<Kurse> kursListe = lehr.getKurs();
         String lehrName = lehr.getNachname() + " " + lehr.getVorname();
@@ -83,34 +84,35 @@ public class LehrerServlet extends HttpServlet {
             for (Kurse kurs : kursListe) {
                 out.println("<tr>");                
                 out.println("<td> <input type='submit' value ='" + kurs.getBezeichnung() + "' name='" + kurs.getBezeichnung() +"'></td>");
-                out.println("<td>" + kurs.getStudentens().size() + "</td>");
-                out.println("</tr>");                
+                out.println("<td>" + kurs.getKursnoten().size() + "</td>");
+                out.println("</tr>");
                 
                 if (strPressedButton == null){
                     strPressedButton = request.getParameter(kurs.getBezeichnung());
                     chosenCourseID = kurs.getId();                    
                 }
             }
-            out.println("</form>");                        
+            out.println("</form>");
             
-            out.println("<form method='post'>");
-            out.println("<b>Kurs: " + strPressedButton + " </b>");
-            out.println("<table border = '1'>");
-            out.println("<td>Student</td>");
-            out.println("<td>Note</td>"); 
-            
-            Kurse kurs = kurseFacade.find(chosenCourseID);
-            List<Studenten> studList = kurs.getStudentens();            
-            
-            for(Studenten stud : studList){
-                out.println("<tr>");
-                out.println("<td> " + stud.getNachname() +  " " + stud.getVorname() + " </td>");
-                                
-                
-                out.println("<td> <input type='text' name='noteStudID" +stud.getId()+ "' value='" +"'></td>");
-                out.println("</tr>");
+            if (strPressedButton != null){                
+                out.println("<form method='post'>");
+                out.println("<b>Kurs: " + strPressedButton + " </b>");
+                out.println("<table border = '1'>");
+                out.println("<td>Student</td>");
+                out.println("<td>Note</td>"); 
+
+                Kurse kurs = kurseFacade.find(chosenCourseID);
+                List<Kursnoten> kursNotenList = kurs.getKursnoten();
+
+                for(Kursnoten kn : kursNotenList){
+                    Studenten stud = kn.getStudent();                    
+                    out.println("<tr>");
+                    out.println("<td> " + stud.getNachname() +  " " + stud.getVorname() + " </td>");
+                    out.println("<td> " + kn.getNote() + "</td>");
+                    out.println("</tr>");
+                }
+                out.println("</form>");
             }
-            
             out.println("</body>");
             out.println("</html>");
         }

@@ -20,6 +20,15 @@
     <class>ejb.entitiesV2.Admin</class>
     <class>ejb.entities.LogIns</class>
     <class>ejb.entities.Admin</class>
+    <class>ejb.entities_2.Studenten</class>
+    <class>ejb.entities_2.Kurse</class>
+    <class>ejb.entities_2.Lehrer</class>
+    <class>ejb.entities_2.Gruppen</class>
+    <class>ejb.entities_2.Studiengaenge</class>
+    <class>ejb.entities_2.LogIns</class>
+    <class>ejb.entities_2.Nutzerrechte</class>
+    <class>ejb.entities_2.Admin</class>
+    <class>ejb.entities_2.Kursnoten</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="hibernate.hbm2ddl.auto" value="update"/>

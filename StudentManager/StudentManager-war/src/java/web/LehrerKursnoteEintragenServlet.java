@@ -6,12 +6,11 @@
 package web;
 
 import ejb.UserData;
-import ejb.entities.Kurse;
-import ejb.entities.Kursnoten;
-import ejb.entities.StudentenFacade;
+import ejb.entities.Lehrer;
+import ejb.entities.LehrerFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.util.Date;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,16 +22,15 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ralph
  */
-@WebServlet(name="StudentServlet", urlPatterns = {"/StudentServlet"}) 
-public class StudentServlet extends HttpServlet {
+@WebServlet(name="LehrerKursnoteEintragenServlet", urlPatterns = {"/LehrerKursnoteEintragenServlet"})
+public class LehrerKursnoteEintragenServlet extends HttpServlet {
 
     @EJB
-    private StudentenFacade studentenFacade;
+    private LehrerFacade lehrerF;
     
-    @EJB
-    private UserData sblb;
     
     /**
+     * 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
@@ -45,36 +43,26 @@ public class StudentServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-           
-            request.getSession(true);
-            UserData userData = (UserData) request.getSession().getAttribute("UserID");                                      
-            
+                        
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet StudentenServlet</title>");            
+            out.println("<title>Servlet LehrerKursnoteEintragenServlet</title>");            
             out.println("</head>");
             out.println("<body>");
             
-            out.println(userData.getUserOverview());
+            UserData userData = (UserData) request.getSession().getAttribute("UserID");  
+//            long userID = userData.getCurrentUserID();        
+//            Lehrer lehr = lehrerF.find(userID);            
+//            
+//            String lehrName = lehr.getNachname() + " " + lehr.getVorname();
+//            Date lehrBirthdate = lehr.getGeburtsdatum();  
+//            
+//            out.println("<p style = 'border:3px; border-style:solid; border-color:#00FF00; background-color:#00FF00; padding:1em;'> "
+//                        + lehrName
+//                        + "<br>"  + lehrBirthdate.toString() + " </p>");    
             
-            out.println("<table border = '1'>");
-            out.println("<td>Kurs</td>");            
-            out.println("<td>Lehrer</td>");
-            out.println("<td>Note</td>");
-
-            List<Kursnoten> kursNotenListe = userData.getCurrentStudent().getKursnoten();
-            for (Kursnoten kursNote : kursNotenListe) {
-                Kurse kurs = kursNote.getKurse();
-                
-                out.println("<tr>");                
-                out.println("<td>" + kurs.getBezeichnung() + "</td>");                
-                out.println("<td>" + kurs.getLehrer().getNachname() + " " +kurs.getLehrer().getVorname() + "</td>");
-                out.println("<td>" + kursNote.getNote() + "</td>");
-                out.println("</tr>");
-            }
-            out.println("</table>");
-
+            
             out.println("</body>");
             out.println("</html>");
         }
