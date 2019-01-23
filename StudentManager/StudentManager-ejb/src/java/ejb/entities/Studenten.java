@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -41,8 +40,8 @@ public class Studenten implements Serializable {
     @ManyToOne
     private Studiengaenge studiengaenge;
 
-    @OneToMany(mappedBy = "student")
-    private List<Gruppen> gruppe;
+    @ManyToOne
+    private Gruppen gruppe;
 
     @ManyToMany(mappedBy = "studentens")
     private List<Kurse> kurses;
@@ -95,25 +94,12 @@ public class Studenten implements Serializable {
         this.studiengaenge = studiengaenge;
     }
 
-    public List<Gruppen> getGruppe() {
-        if (gruppe == null) {
-            gruppe = new ArrayList<>();
-        }
+    public Gruppen getGruppe() {
         return gruppe;
     }
 
-    public void setGruppe(List<Gruppen> gruppe) {
+    public void setGruppe(Gruppen gruppe) {
         this.gruppe = gruppe;
-    }
-
-    public void addGruppe(Gruppen gruppe) {
-        getGruppe().add(gruppe);
-        gruppe.setStudent(this);
-    }
-
-    public void removeGruppe(Gruppen gruppe) {
-        getGruppe().remove(gruppe);
-        gruppe.setStudent(null);
     }
 
     public List<Kurse> getKurses() {

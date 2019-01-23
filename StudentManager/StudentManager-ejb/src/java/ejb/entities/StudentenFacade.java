@@ -5,7 +5,6 @@
  */
 package ejb.entities;
 
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,9 +28,4 @@ public class StudentenFacade extends AbstractFacade<Studenten> {
         super(Studenten.class);
     }
     
-    public List<Kurse> getKurse(long studentenID){
-        Studenten stud = this.find(studentenID);         
-        List<Kurse> kurse = stud.getKurses();
-        return kurse;
-    }    
 }

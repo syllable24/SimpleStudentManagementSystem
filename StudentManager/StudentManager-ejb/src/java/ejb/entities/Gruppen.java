@@ -1,11 +1,13 @@
 package ejb.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * @author ralph
@@ -20,8 +22,8 @@ public class Gruppen implements Serializable {
     @Basic
     private String Bezeichnung;
 
-    @ManyToOne
-    private Studenten student;
+    @OneToMany(mappedBy = "gruppe")
+    private List<Studenten> studenten;
 
     public Long getId() {
         return id;
@@ -39,12 +41,25 @@ public class Gruppen implements Serializable {
         this.Bezeichnung = Bezeichnung;
     }
 
-    public Studenten getStudent() {
-        return student;
+    public List<Studenten> getStudenten() {
+        if (studenten == null) {
+            studenten = new ArrayList<>();
+        }
+        return studenten;
     }
 
-    public void setStudent(Studenten student) {
-        this.student = student;
+    public void setStudenten(List<Studenten> studenten) {
+        this.studenten = studenten;
+    }
+
+    public void addStudenten(Studenten studenten) {
+        getStudenten().add(studenten);
+        studenten.setGruppe(this);
+    }
+
+    public void removeStudenten(Studenten studenten) {
+        getStudenten().remove(studenten);
+        studenten.setGruppe(null);
     }
 
 }

@@ -20,10 +20,10 @@
                 <jpa:xwm/>
                 <jpa:xm/>
             </jpa:many-to-one>
-            <jpa:one-to-many orp="false" collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_1547632593208515" connected-attribute-id="_1547900008074139" v="true" xvt="" name="gruppe" id="_1547900008075140">
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_1547632593208515" connected-attribute-id="_154824123623554" v="true" xvt="" name="gruppe" id="_154824123623353">
                 <jpa:xwm/>
                 <jpa:xm/>
-            </jpa:one-to-many>
+            </jpa:many-to-one>
             <jpa:one-to-one own="true" orp="false" optional="true" primaryKey="false" connected-entity-id="_1547633023820532" connected-attribute-id="_1547633080604542" v="true" xvt="" name="logIn" id="_1547633080603541">
                 <jpa:xwm/>
                 <jpa:xm/>
@@ -136,10 +136,10 @@
                 <jpa:xwm/>
                 <jpa:xm/>
             </jpa:basic>
-            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_1547632413676493" connected-attribute-id="_1547900008075140" v="true" xvt="" name="student" id="_1547900008074139">
+            <jpa:one-to-many orp="false" collection-type="java.util.List" cit="java.util.ArrayList" connected-entity-id="_1547632413676493" connected-attribute-id="_154824123623353" v="true" xvt="" name="studenten" id="_154824123623554">
                 <jpa:xwm/>
                 <jpa:xm/>
-            </jpa:many-to-one>
+            </jpa:one-to-many>
             <jpa:id attribute-type="Long" v="true" xvt="" name="id" id="_1547632593208516">
                 <jpa:xwm/>
                 <jpa:xm/>
@@ -310,7 +310,7 @@
             <i ref="_1547632456171499" x="185" y="246"/>
             <i ref="_1547632498066506" x="460" y="345"/>
             <i ref="_1547633105710543" x="998" y="230"/>
-            <i ref="_1547632413676493" x="446" y="28"/>
+            <i ref="_1547632413676493" x="446" y="32"/>
         </jpa:ws>
     </jpa:wsl>
 </jpa:entity-mappings>

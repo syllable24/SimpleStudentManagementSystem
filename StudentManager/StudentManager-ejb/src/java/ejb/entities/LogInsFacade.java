@@ -26,7 +26,10 @@ public class LogInsFacade extends AbstractFacade<LogIns> {
         return em;
     }
 
- /**
+    public LogInsFacade() {
+        super(LogIns.class);
+    }
+/**
      * Prüft, ob die logIn Daten zu einem user gehören und retourniert das
      * entsprechende Entity-Objekt des Users. 
      * 
@@ -47,18 +50,12 @@ public class LogInsFacade extends AbstractFacade<LogIns> {
                 result = queryResult.getStudent();
             }
             else if (queryResult.getLehrer() != null){
-                result = queryResult.getStudent();
+                result = queryResult.getLehrer();
             }        
         }
         catch(NoResultException e){
             System.out.println("No matching User!");            
         }
         return result;
-    }    
-    
-    
-    public LogInsFacade() {
-        super(LogIns.class);
-    }
-    
+    }     
 }

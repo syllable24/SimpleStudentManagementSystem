@@ -5,8 +5,14 @@
  */
 package web;
 
+import ejb.entities.Kurse;
+import ejb.entities.Lehrer;
+import ejb.entities.LehrerFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +26,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name="LehrerServlet", urlPatterns = {"/LehrerServlet"})
 public class LehrerServlet extends HttpServlet {
 
+    @EJB 
+    private LehrerFacade lehrerF;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,15 +41,43 @@ public class LehrerServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
+        String strPar = "";
+        long userID = (long) request.getSession().getAttribute("UserID");  
+        Lehrer lehr = lehrerF.find(userID);
+        
+        List<Kurse> kursListe = lehr.getKurs();
+        String lehrName = lehr.getNachname() + " " + lehr.getVorname();
+        Date lehrBirthdate = lehr.getGeburtsdatum();        
+        
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+            
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet LehrerServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LehrerServlet at " + request.getContextPath() + "</h1>");
+
+            out.println("<p style = 'border:3px; border-style:solid; border-color:#00FF00; background-color:#00FF00; padding:1em;'> "
+                        + lehrName
+                        + "<br>"  + lehrBirthdate.toString() + " </p>");
+            
+            out.println("<form method='post'>");
+            out.println("<table border = '1'>");
+            out.println("<td>Kurs</td>");
+            out.println("<td># Studenten</td>");
+            
+            for (Kurse kurs : kursListe) {
+                out.println("<tr>");                
+                out.println("<td> <input type='submit' value ='" + kurs.getBezeichnung() + "' name='" + kurs.getBezeichnung() +"'></td>");
+                out.println("<td>" + kurs.getStudentens().size() + "</td>");
+                out.println("</tr>");
+                strPar = request.getParameter(kurs.getBezeichnung());
+            }
+            out.println("</form>");
+            
+            out.println("<p>parameter: " + strPar);
             out.println("</body>");
             out.println("</html>");
         }

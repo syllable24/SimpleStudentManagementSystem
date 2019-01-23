@@ -10,7 +10,7 @@ import ejb.entities.Studenten;
 import ejb.entities.StudentenFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Iterator;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -18,7 +18,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.transaction.Transactional;
 
 /**
  *
@@ -46,7 +45,13 @@ public class StudentServlet extends HttpServlet {
            
             request.getSession(true);
             long userID = (long) request.getSession().getAttribute("UserID");  
-            List<Kurse> kursListe = studentenFacade.getKurse(userID);           
+            //List<Kurse> kursListe = studentenFacade.getKurse(userID);     
+            
+            Studenten stud = studentenFacade.find(userID);
+            List<Kurse> kursListe = stud.getKurses();
+            String studName = stud.getVorname() + " " + stud.getNachname();
+            String stuStudigang = stud.getStudiengaenge().getBezeichnung();
+            Date studBirthdate = stud.getGeburtsdatum();
             
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -55,21 +60,26 @@ public class StudentServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             
-            out.println("<b>I'm still here</b>");
+            out.println("<p style = 'border:3px; border-style:solid; border-color:#00FF00; background-color:#00FF00; padding:1em;'> "
+                        + studName
+                        + "<br>"  + studBirthdate.toString() 
+                        + "<br>"  + stuStudigang                         
+                        + "<br> " + stud.getGruppe().getBezeichnung() + " </p>");
             
             out.println("<table border = '1'>");
-            out.println("<td>Kurs</td>");
-            out.println("<td>Note</td>");                 
+            out.println("<td>Kurs</td>");            
+            out.println("<td>Lehrer</td>");
+            out.println("<td>Note</td>");
 
             for (Kurse kurs : kursListe) {
                 out.println("<tr>");                
-                out.println("<td>" + kurs.getBezeichnung() + "</td>");
+                out.println("<td>" + kurs.getBezeichnung() + "</td>");                
+                out.println("<td>" + kurs.getLehrer().getNachname() + " " +kurs.getLehrer().getVorname() + "</td>");
                 out.println("<td>" + kurs.getNote() + "</td>");
                 out.println("</tr>");
             }
             out.println("</table>");   
-            
-            
+
             out.println("</body>");
             out.println("</html>");
         }
