@@ -6,6 +6,7 @@
 package web;
 
 import ejb.SessionManager;
+import ejb.UserData;
 import ejb.entities.Lehrer;
 import ejb.entities.LogIns;
 import ejb.entities.LogInsFacade;
@@ -22,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -31,8 +33,10 @@ import javax.servlet.http.HttpServletResponse;
 public class LogIn extends HttpServlet {
 
     @EJB
-    private LogInsFacade logInLookup;
+    private UserData userData;
 
+    @EJB
+    private LogInsFacade logInLookup;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,10 +52,10 @@ public class LogIn extends HttpServlet {
         
         boolean bNoUserFound = false;
         
-        request.getSession(true);
+        HttpSession session = request.getSession(true);
+        
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            
+        try (PrintWriter out = response.getWriter()) {            
             String userName = request.getParameter("UserName");
             String userPassword = request.getParameter("UserPassword");
             
@@ -61,20 +65,25 @@ public class LogIn extends HttpServlet {
                 login.setUsernameMD5(userName);
                 login.setPasswortMD5(userPassword);
 
-                Object result = logInLookup.determineUserType(login);
-
+                Object result = logInLookup.determineUserType(login);                
+                
                 if(result instanceof Studenten){
-                    request.getSession().setAttribute("UserID", ((Studenten) result).getId());
-                    getServletConfig().getServletContext()
-                                      .getRequestDispatcher("/StudentServlet")
-                                      .forward(request, response); 
-                    response.sendRedirect("/StudentServlet");
+                    userData.setCurrentUserID(((Studenten) result).getId());
+                    session.setAttribute("UserID", userData);
+                    //request.getSession().setAttribute("UserID", ((Studenten) result).getId());
+//                    getServletConfig().getServletContext()
+//                                      .getRequestDispatcher("/StudentServlet")
+//                                      .forward(request, response); 
+                    response.sendRedirect("StudentServlet");
                 }
                 else if(result instanceof Lehrer){
-                    request.getSession().setAttribute("UserID", ((Lehrer) result).getId());
-                    getServletConfig().getServletContext()
-                                      .getRequestDispatcher("/LehrerServlet")
-                                      .forward(request, response);
+                    userData.setCurrentUserID(((Lehrer) result).getId());
+                    session.setAttribute("UserID", userData);
+                    //request.getSession().setAttribute("UserID", ((Lehrer) result).getId());
+//                    getServletConfig().getServletContext()
+//                                      .getRequestDispatcher("/LehrerServlet")
+//                                      .forward(request, response);
+                    response.sendRedirect("LehrerServlet");
                 }
                 else{
                     bNoUserFound = true;

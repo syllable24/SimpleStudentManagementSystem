@@ -5,6 +5,7 @@
  */
 package web;
 
+import ejb.UserData;
 import ejb.entities.Kurse;
 import ejb.entities.Studenten;
 import ejb.entities.StudentenFacade;
@@ -29,6 +30,9 @@ public class StudentServlet extends HttpServlet {
     @EJB
     private StudentenFacade studentenFacade;
     
+    @EJB
+    private UserData sblb;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,8 +48,8 @@ public class StudentServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
            
             request.getSession(true);
-            long userID = (long) request.getSession().getAttribute("UserID");  
-            //List<Kurse> kursListe = studentenFacade.getKurse(userID);     
+            UserData userData = (UserData) request.getSession().getAttribute("UserID");  
+            long userID = userData.getCurrentUserID();            
             
             Studenten stud = studentenFacade.find(userID);
             List<Kurse> kursListe = stud.getKurses();
