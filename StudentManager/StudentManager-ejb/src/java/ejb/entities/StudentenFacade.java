@@ -35,7 +35,10 @@ public class StudentenFacade extends AbstractFacade<Studenten> {
         List<Studenten> result = null;
         
         Query q = em.createQuery("SELECT s FROM Studenten s WHERE s.Nachname = '" + name + "'");
+        // q.setParameter für LIKE Query verwenden
+        
         result = (List<Studenten>) q.getResultList();        
         return result;
-    }    
+    }                
+    
 }

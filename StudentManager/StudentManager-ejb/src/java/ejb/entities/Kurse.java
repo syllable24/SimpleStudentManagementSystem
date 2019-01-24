@@ -74,4 +74,18 @@ public class Kurse implements Serializable {
         kursnoten.setKurse(null);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Kurse){
+            Kurse kur = (Kurse) obj;
+            
+            if(kur.getId() == this.getId()){
+                return true;
+            }            
+            else return false;
+        }
+        else return false;        
+    }
+
+    
 }

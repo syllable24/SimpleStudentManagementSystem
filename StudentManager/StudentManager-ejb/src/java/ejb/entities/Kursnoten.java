@@ -41,8 +41,17 @@ public class Kursnoten implements Serializable {
         else return Note;
     }
 
-    public void setNote(String Note) {
-        this.Note = Note;
+    public void setNote(String Note) {        
+        try{
+            int note = Integer.parseInt(Note);
+            if(note < 1 || note > 5){
+                this.Note = null;
+            }
+            else this.Note = String.valueOf(note);
+        }
+        catch(NumberFormatException e){
+            this.Note = null;
+        }                
     }
 
     public Kurse getKurse() {

@@ -36,9 +36,6 @@
     <servlet>
         <servlet-name>LehrerStudentEinschreibenServlet</servlet-name>
         <servlet-class>web.LehrerStudentEinschreibenServlet</servlet-class>
-    </servlet><servlet>
-        <servlet-name>LehrerStudentEinschreibenServlet</servlet-name>
-        <servlet-class>web.LehrerStudentEinschreibenServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LogIn</servlet-name>

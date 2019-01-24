@@ -34,7 +34,7 @@ public class KurseFacade extends AbstractFacade<Kurse> {
     public List<Kurse> getKursByName(String name){
         List<Kurse> result = null;
         
-        Query q = em.createQuery("SELECT k FROM Kurse k WHERE k.Bezeichnung = '" + name + "'");
+        Query q = em.createQuery("SELECT k FROM Kurse k WHERE k.Bezeichnung ='" + name + "'");
         result = (List<Kurse>) q.getResultList();
         return result;
     }    

@@ -58,26 +58,37 @@ public class StudentServlet extends HttpServlet {
             
             out.println(userData.getUserOverview());
             
-            out.println("<table border = '1'>");
-            out.println("<td>Kurs</td>");            
-            out.println("<td>Lehrer</td>");
-            out.println("<td>Note</td>");
-
-            List<Kursnoten> kursNotenListe = userData.getCurrentStudent().getKursnoten();
-            for (Kursnoten kursNote : kursNotenListe) {
-                Kurse kurs = kursNote.getKurse();
-                
-                out.println("<tr>");                
-                out.println("<td>" + kurs.getBezeichnung() + "</td>");                
-                out.println("<td>" + kurs.getLehrer().getNachname() + " " +kurs.getLehrer().getVorname() + "</td>");
-                out.println("<td>" + kursNote.getNote() + "</td>");
-                out.println("</tr>");
-            }
-            out.println("</table>");
+            displayKursnoten(out, userData);
 
             out.println("</body>");
             out.println("</html>");
         }
+    }
+
+    /**
+     * Stellt eine Tabelle bestehend aus Kurs, Lehrer und Note für den aktuell
+     * eingeloggten User dar.
+     * 
+     * @param out PrintWriter auf Output-Ziel.
+     * @param userData Aktuell eingeloggter User.
+     */
+    private void displayKursnoten(final PrintWriter out, UserData userData) {
+        out.println("<table border = '1'>");
+        out.println("<td>Kurs</td>");
+        out.println("<td>Lehrer</td>");
+        out.println("<td>Note</td>");
+        
+        List<Kursnoten> kursNotenListe = userData.getCurrentStudent().getKursnoten();
+        for (Kursnoten kursNote : kursNotenListe) {
+            Kurse kurs = kursNote.getKurse();
+            
+            out.println("<tr>");
+            out.println("<td>" + kurs.getBezeichnung() + "</td>");
+            out.println("<td>" + kurs.getLehrer().getNachname() + " " +kurs.getLehrer().getVorname() + "</td>");
+            out.println("<td>" + kursNote.getNote() + "</td>");
+            out.println("</tr>");
+        }
+        out.println("</table>");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

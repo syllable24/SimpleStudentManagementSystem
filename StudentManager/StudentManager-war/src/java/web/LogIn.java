@@ -48,39 +48,14 @@ public class LogIn extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException {                
         
-        boolean bNoUserFound = false;
-        
+        boolean bNoUserFound;
         HttpSession session = request.getSession(true);
         
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {            
-            String userName = request.getParameter("UserName");
-            String userPassword = request.getParameter("UserPassword");
-            
-            if((userName != null) && (userPassword != null)){
-               
-                LogIns login = new LogIns();
-                login.setUsernameMD5(userName);
-                login.setPasswortMD5(userPassword);
-
-                Object result = logInLookup.determineUserType(login);
-                
-                if(result instanceof Studenten){
-                    userData.setCurrentStudent(((Studenten) result));
-                    session.setAttribute("UserID", userData);
-                    response.sendRedirect("StudentServlet");
-                }
-                else if(result instanceof Lehrer){
-                    userData.setCurrentLehrer(((Lehrer) result));
-                    session.setAttribute("UserID", userData);
-                    response.sendRedirect("LehrerMenu");
-                }
-                else{
-                    bNoUserFound = true;
-                }
-            }
+            bNoUserFound = processLogIn(request, session, response);
 
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -89,17 +64,7 @@ public class LogIn extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             
-            out.println("<h1>Student Manager LogIn</h1>");
-            
-            out.println("<form method='post'>");
-            out.println("<b>Username:</b></br>");
-            out.println("<input type='text' name='UserName'>");
-            out.println("</br>");
-            out.println("<b>Passwort:</b></br>");
-            out.println("<input type='password' name='UserPassword'>");
-            out.println("</br>");
-            out.println("<input type='submit' value='Log In'>");
-            out.println("</form>");
+            displayLogInForm(out);
 
             if(bNoUserFound){
                 out.println("<p style = 'border:3px; border-style:solid; border-color:#FF0000; padding:1em;'> "
@@ -112,6 +77,67 @@ public class LogIn extends HttpServlet {
             Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
             response.sendRedirect("/ErrorServlet");
         }
+    }
+
+    /**
+     * Stellt ein LogIn Form, bestehend aus Textfeldern für Username und Passwort 
+     * und einem Submit-Button. 
+     * 
+     * @param out PrintWriter auf Output-Ziel.
+     */
+    private void displayLogInForm(final PrintWriter out) {
+        out.println("<h1>Student Manager LogIn</h1>");
+        out.println("<form method='post'>");
+        out.println("<b>Username:</b></br>");
+        out.println("<input type='text' name='UserName'>");
+        out.println("</br>");
+        out.println("<b>Passwort:</b></br>");
+        out.println("<input type='password' name='UserPassword'>");
+        out.println("</br>");
+        out.println("<input type='submit' value='Log In'>");
+        out.println("</form>");
+    }
+    
+    /**
+     * Prüfen, ob die eingegebenen Userdaten einen gültigen LogIn darstellen und 
+     * Weiterleitung auf das, dem Usertyp entsprechendem, Servlet.
+     * 
+     * 
+     * 
+     * @param request Ermittelung der Userdaten.
+     * @param session Zum Setzen des aktuellen Users als Session-Attribut.
+     * @param response Zur Weiterleitung auf userspezifisches Servlet.     
+     * @return Ob die Userdaten gültig sind.
+     * @throws IOException
+     * @throws NoSuchAlgorithmException 
+     */
+    private boolean processLogIn(HttpServletRequest request, HttpSession session, HttpServletResponse response) throws IOException, NoSuchAlgorithmException {
+        boolean bNoUserFound = false;
+        String userName = request.getParameter("UserName");
+        String userPassword = request.getParameter("UserPassword");
+        if((userName != null) && (userPassword != null)){
+            
+            LogIns login = new LogIns();
+            login.setUsernameMD5(userName);
+            login.setPasswortMD5(userPassword);
+            
+            Object result = logInLookup.determineUserType(login);
+            
+            if(result instanceof Studenten){
+                userData.setCurrentStudent(((Studenten) result));
+                session.setAttribute("UserID", userData);
+                response.sendRedirect("StudentServlet");
+            }
+            else if(result instanceof Lehrer){
+                userData.setCurrentLehrer(((Lehrer) result));
+                session.setAttribute("UserID", userData);
+                response.sendRedirect("LehrerMenu");
+            }
+            else{
+                bNoUserFound = true;
+            }
+        }
+        return bNoUserFound;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
