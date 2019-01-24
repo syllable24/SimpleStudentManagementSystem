@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+  <title>GUI-Elemente ein- und ausblenden ohne und mit Ajax</title>
+</h:head>
+<h:body style="font-family: Helvetica, Arial, Sans-Serif;">
+  <h2><h:outputText value="GUI-Elemente ein- und ausblenden ohne und mit Ajax" /></h2>
+  <h:messages style="color: red" />
+
+  <h:form>
+    <h:outputText value="#{ausblendenBean.uhrzeit}: Uhrzeit des letzten vollst&auml;ndigen Requests" />
+  </h:form>
+
+  <h:form>
+    <h3><h:outputText value="Ein- und ausblenden ohne Ajax" /></h3>
+    <p><h:selectBooleanCheckbox onclick="this.form.submit()" immediate="true"
+                                value="#{ausblendenBean.meineCheckbox1}"
+                                valueChangeListener="#{ausblendenBean.checkboxChanged1}" />
+       <h:outputText value=" Eingabefeld aktivieren (ohne Ajax)" /></p>
+    <p><h:inputText  value="#{ausblendenBean.inputText}" rendered="#{ausblendenBean.meineCheckbox1}" />
+       <h:outputText value=" Zusatzinfo eingeben"        rendered="#{ausblendenBean.meineCheckbox1}" /></p>
+  </h:form>
+
+  <h:form>
+    <h3><h:outputText value="Ein- und ausblenden mit Ajax" /></h3>
+    <p><h:selectBooleanCheckbox value="#{ausblendenBean.meineCheckbox2}"
+                                valueChangeListener="#{ausblendenBean.checkboxChanged2}">
+         <f:ajax render="zusatz zusatz1" />
+       </h:selectBooleanCheckbox>
+       <h:outputText value=" Eingabefeld aktivieren (mit Ajax)" /></p>
+    <h:panelGrid id="zusatz" columns="2">
+      <h:inputText  value="#{ausblendenBean.inputText}" rendered="#{ausblendenBean.meineCheckbox2}" />
+      <h:outputText value=" Zusatzinfo eingeben"        rendered="#{ausblendenBean.meineCheckbox2}" />
+    </h:panelGrid>
+    <h:panelGrid id="zusatz1" columns="2">
+      <h:inputText  value="#{ausblendenBean.inputText}" rendered="#{ausblendenBean.meineCheckbox2}" />
+      <h:outputText value=" Zusatzinfo eingeben"        rendered="#{ausblendenBean.meineCheckbox2}" />
+    </h:panelGrid>
+  </h:form>
+
+</h:body>
+</html>
