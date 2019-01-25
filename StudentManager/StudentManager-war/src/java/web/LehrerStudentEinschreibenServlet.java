@@ -26,8 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author ralph
+ * Ermöglicht es einem Lehrer einen Studenten in beliebig viele Kurse einzutragen. 
  */
 @WebServlet(name="LehrerStudentEinschreibenServlet", urlPatterns = {"/LehrerStudentEinschreibenServlet"})
 public class LehrerStudentEinschreibenServlet extends HttpServlet {
@@ -65,6 +64,10 @@ public class LehrerStudentEinschreibenServlet extends HttpServlet {
             
             UserData userData = (UserData) request.getSession().getAttribute("UserID");                          
             out.println(userData.getUserOverview());               
+            
+            if(request.getParameter("LogOut") != null){                
+                response.sendRedirect("LogIn");
+            }
             
             // 1 Alle Studenten anzeigen 
             List<Studenten> allStudents = studentenFacade.findAll();
@@ -117,23 +120,30 @@ public class LehrerStudentEinschreibenServlet extends HttpServlet {
                     out.println("<tr>");
                     out.println("<td> " + kur.getBezeichnung() + " </td>");                    
                     out.println("<td> <input type='checkbox' name='KursID"+ kur.getId() +"'" + strChecked + "> </td>");
-                    out.println("</tr>");       
-
-                    if(request.getParameter("Commit") != null){
-                       //String checkedKurs = request.getParameter("KursID"+kur.getId());                       
-                       for(Long key : studKurseEingetragen.keySet()){
-                           Kurse k = studKurseEingetragen.get(key);
-                           
-                           if(request.getParameter("KursID"+k.getId())==null){
-                               
-                               Kursnoten kn = new Kursnoten();                               
-                               kn.setId(key);
-                               //delete ausführen!!
-                               kursnotenFacade.deletetudentKursLink(kn);                               
-                           }                           
-                       }                                              
-                    }
+                    out.println("</tr>");                          
                 }
+                
+                if(request.getParameter("Commit") != null){                    
+                    for(Long key : studKurseEingetragen.keySet()){
+                        Kurse k = studKurseEingetragen.get(key);
+                        if(request.getParameter("KursID"+k.getId())==null){
+                            Kursnoten kn = new Kursnoten();                               
+                            kn.setId(key);                                                        
+                            kursnotenFacade.deleteStudentKursLink(kn);                               
+                        }                           
+                    }
+                    
+                    for(Kurse currKurs : studKurseNichtEingetragen){                        
+                        if(request.getParameter("KursID"+currKurs.getId())!=null){
+                            Kursnoten kn = new Kursnoten();                                                     
+                            kn.setStudent(stud);
+                            kn.setKurse(currKurs);                            
+                            kursnotenFacade.insertStudentKursLink(kn);                               
+                        }                           
+                    }                                                            
+                    response.sendRedirect("LehrerStudentEinschreibenServlet");
+                }                
+                
                 out.println("<input type='submit' value='Student bearbeiten' name='Commit'>");   
                 out.println("</table>");
                 out.println("</form>");                

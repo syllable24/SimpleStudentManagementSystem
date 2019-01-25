@@ -14,7 +14,9 @@ import ejb.entities.LehrerFacade;
 import ejb.entities.Studenten;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,8 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author ralph
+ * Ermöglicht es einem Lehrer Noten für die Kurse eines Studenten einzutragen.
  */
 @WebServlet(name="LehrerNotenEintragenServlet", urlPatterns = {"/LehrerNotenEintragenServlet"})
 public class LehrerNotenEintragenServlet extends HttpServlet {
@@ -53,7 +54,11 @@ public class LehrerNotenEintragenServlet extends HttpServlet {
 
         String strPressedButton = null;
                 
-        UserData userData = (UserData) request.getSession().getAttribute("UserID");                          
+        UserData userData = (UserData) request.getSession().getAttribute("UserID");          
+        
+        if(request.getParameter("LogOut") != null){            
+            response.sendRedirect("LogIn");
+        }        
         
         try (PrintWriter out = response.getWriter()) {
             
@@ -93,23 +98,28 @@ public class LehrerNotenEintragenServlet extends HttpServlet {
         out.println("<b>Kurs: " + strPressedButton + " </b>");
         out.println("<table border = '1'>");
         out.println("<td>Student</td>");
-        out.println("<td>Note</td>");
+        out.println("<td>Note Alt</td>");
+        out.println("<td>Note Neu</td>");
         
         Kurse kurs = kurseFacade.find(chosenCourseID);
         List<Kursnoten> kursNotenList = kurs.getKursnoten();
-        
+
         for(Kursnoten kn : kursNotenList){
             Studenten stud = kn.getStudent();
+            String inputTextName="Note" + stud.getId();            
+            String insertedNote = request.getParameter(inputTextName);
+            
             out.println("<tr>");
             out.println("<td> " + stud.getNachname() +  " " + stud.getVorname() + " </td>");
-            out.println("<td> <input type='text' value='" + kn.getNote() + "' name='Note"+ stud.getId() +"'></td>");
+            out.println("<td> " + kn.getNote() + "</td>");            
+            out.println("<td> <input type='text' name='" +inputTextName+ "'> </td>");
             out.println("</tr>");
             
-            if(request.getParameter("Commit") != null){
-                String insertedNote = request.getParameter("Note"+stud.getId());                                
+            insertedNote = request.getParameter(inputTextName);            
+            
+            if(request.getParameter("Commit") != null){                                                
                 sendUpdatedKursnote(kn, kurs, insertedNote, stud);                
-                response.sendRedirect("LehrerNotenEintragenServlet");
-            }
+            }                        
         }        
         out.println("</form>");
         out.println("<input type='submit' value='Noten eintragen' name='Commit'>");
@@ -117,7 +127,7 @@ public class LehrerNotenEintragenServlet extends HttpServlet {
 
     /**
      * Erstellt ein Kursnoten Objekt, welches dazu verwendet werden soll einem 
-     * Studenten in einem Kurs eine Note zuordnet.
+     * Studenten in einem Kurs eine Note zuzuordnen.
      * 
      * @param kn Neue Kursnote
      * @param kurs Kurs, der eine neue Note bekommt.

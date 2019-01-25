@@ -20,17 +20,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author ralph
+ * Stellt eine Übersicht über alle Kurse mit ihren Lehrern und den erhaltenen 
+ * Noten für einen Studenten dar.
  */
 @WebServlet(name="StudentServlet", urlPatterns = {"/StudentServlet"}) 
 public class StudentServlet extends HttpServlet {
-
-    @EJB
-    private StudentenFacade studentenFacade;
-    
-    @EJB
-    private UserData sblb;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -55,6 +49,10 @@ public class StudentServlet extends HttpServlet {
             out.println("<title>Servlet StudentenServlet</title>");            
             out.println("</head>");
             out.println("<body>");
+            
+            if(request.getParameter("LogOut") != null){                
+                response.sendRedirect("LogIn");
+            }
             
             out.println(userData.getUserOverview());
             

@@ -5,17 +5,12 @@
  */
 package ejb.entities;
 
-import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-/**
- *
- * @author ralph
- */
 @Stateless
 public class KursnotenFacade extends AbstractFacade<Kursnoten> {
 
@@ -34,6 +29,12 @@ public class KursnotenFacade extends AbstractFacade<Kursnoten> {
         super(Kursnoten.class);
     }       
     
+    /**
+     * Aktualisiert die Note eines Studenten in einem bestimmten Kurs. 
+     * 
+     * @param kn Verknüpfungs-Entity, welche die Zuordnung von Student, Kurs und 
+     * Note beinhaltet.
+     */
     public void updateKursnote(Kursnoten kn){       
         Query q = em.createQuery("UPDATE Kursnoten k "
                         + "SET k.student = :student, k.kurse = :kurs, k.Note = :note "
@@ -46,14 +47,20 @@ public class KursnotenFacade extends AbstractFacade<Kursnoten> {
         q.executeUpdate();
         
     }
-    public void deletetudentKursLink(Kursnoten kn){       
-        Query q = em.createQuery("DELETE Kursnoten k "
+    
+    /**
+     * Entfernt einen Studenten aus einem Kurs. 
+     *      
+     * @param kn Verknüpfungs-Entity, welche die Zuordnung von Student und Kurs 
+     * beinhaltet.
+     */
+    public void deleteStudentKursLink(Kursnoten kn){       
+        Query q = em.createQuery("DELETE FROM Kursnoten k "
                                  + "WHERE k.id = :kursnoteID");       
         q.setParameter("kursnoteID",  + kn.getId());
         q.executeUpdate();        
     }    
-    
-    
+        
     /**
      * Schreibt einen Studenten in einen Kurs ein. 
      * Dabei darf keine Note gesetzt sein.
@@ -61,7 +68,7 @@ public class KursnotenFacade extends AbstractFacade<Kursnoten> {
      * @param kn Verknüpfung von Student und Kurs
      */
     public void insertStudentKursLink(Kursnoten kn){
-        if(kn.getNote() == null){
+        if(kn.getNote().equals("Kein Eintrag")){
             em.persist(kn);
         }
     }

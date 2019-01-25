@@ -12,10 +12,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-/**
- *
- * @author ralph
- */
 @Stateless
 public class KurseFacade extends AbstractFacade<Kurse> {
 
@@ -31,6 +27,12 @@ public class KurseFacade extends AbstractFacade<Kurse> {
         super(Kurse.class);
     }
     
+    /**
+     * Retourniert eine Kurs-Liste basierend auf dem Namen des Kurses. 
+     * 
+     * @param name Name des Kurses.
+     * @return Liste an Kursen, die den übergebenen Namen haben.
+     */
     public List<Kurse> getKursByName(String name){
         List<Kurse> result = null;
         

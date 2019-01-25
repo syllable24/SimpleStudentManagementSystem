@@ -9,7 +9,6 @@ import ejb.UserData;
 import ejb.entities.Kurse;
 import ejb.entities.KurseFacade;
 import ejb.entities.Kursnoten;
-import ejb.entities.LehrerFacade;
 import ejb.entities.Studenten;
 import ejb.entities.StudentenFacade;
 import java.io.IOException;
@@ -36,22 +35,16 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name="LehrerMenu", urlPatterns = {"/LehrerMenu"})
 public class LehrerMenu extends HttpServlet {
-
-    @EJB 
-    private LehrerFacade lehrerF;
     
     @EJB
     private StudentenFacade studetnF;   
     
     @EJB
     private KurseFacade kurseF;
-    
-    private boolean bStudentSuche;
-    private boolean bKursSuche;
-    
+        
     /**
-     * 
-     * 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -72,7 +65,11 @@ public class LehrerMenu extends HttpServlet {
             UserData userData = (UserData) request.getSession().getAttribute("UserID");                          
             out.println(userData.getUserOverview());            
             
-            displayMenuButtons(out);           
+            if(request.getParameter("LogOut") != null){                                
+                response.sendRedirect("LogIn");
+            }            
+            
+            displayMenuButtons(out);
 
             if(request.getParameter("SearchStudent") != null){
                 displayStudentSucheForm(out);

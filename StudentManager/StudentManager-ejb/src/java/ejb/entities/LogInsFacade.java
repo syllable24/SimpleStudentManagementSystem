@@ -11,10 +11,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-/**
- *
- * @author ralph
- */
 @Stateless
 public class LogInsFacade extends AbstractFacade<LogIns> {
 
@@ -29,7 +25,8 @@ public class LogInsFacade extends AbstractFacade<LogIns> {
     public LogInsFacade() {
         super(LogIns.class);
     }
-/**
+    
+    /**
      * Prüft, ob die logIn Daten zu einem user gehören und retourniert das
      * entsprechende Entity-Objekt des Users. 
      * 

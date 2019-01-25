@@ -5,17 +5,12 @@
  */
 package ejb.entities;
 
-import ejb.entities.Studenten;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-/**
- *
- * @author ralph
- */
 @Stateless
 public class StudentenFacade extends AbstractFacade<Studenten> {
 
@@ -31,6 +26,12 @@ public class StudentenFacade extends AbstractFacade<Studenten> {
         super(Studenten.class);
     }
     
+    /**
+     * Retourniert eine Studenten-Liste basierend auf dem Nachnamen der Studenten. 
+     * 
+     * @param name Nachname des Studenten
+     * @return Liste an Studenten, die den übergebenen Nachnamen haben.
+     */
     public List<Studenten> getStudentByName(String name){
         List<Studenten> result = null;
         

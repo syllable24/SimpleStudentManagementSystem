@@ -5,7 +5,6 @@
  */
 package web;
 
-import ejb.SessionManager;
 import ejb.UserData;
 import ejb.entities.Lehrer;
 import ejb.entities.LogIns;
@@ -26,8 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
- * @author ralph
+ * Ermöglicht es einem User sich einzuloggen. 
  */
 @WebServlet(name="LogIn", urlPatterns = {"/LogIn"})
 public class LogIn extends HttpServlet {
@@ -55,6 +53,7 @@ public class LogIn extends HttpServlet {
         
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {            
+            userData.clear();
             bNoUserFound = processLogIn(request, session, response);
 
             out.println("<!DOCTYPE html>");
@@ -101,9 +100,7 @@ public class LogIn extends HttpServlet {
     /**
      * Prüfen, ob die eingegebenen Userdaten einen gültigen LogIn darstellen und 
      * Weiterleitung auf das, dem Usertyp entsprechendem, Servlet.
-     * 
-     * 
-     * 
+     *    
      * @param request Ermittelung der Userdaten.
      * @param session Zum Setzen des aktuellen Users als Session-Attribut.
      * @param response Zur Weiterleitung auf userspezifisches Servlet.     
